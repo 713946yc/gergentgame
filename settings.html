@@ -239,24 +239,21 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-
   <div class="menu-icon" onclick="toggleSidebar()">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div></div><div></div><div></div>
   </div>
 
   <div class="center-group">
     <div class="center-box">
-        <span id="moneyAmount" class="amount">$0.00</span>
+      <span id="moneyAmount">$0.00</span>
     </div>
     <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
-    <img src="images/settings.png" class="settings-icon" alt="settings" onclick="location.href='settings.html'">
-    <img src="images/rewards.png" class="rewards-icon" alt="rewards" onclick="location.href='rewards.html'">
-    <img src="images/profile.png" class="profile-icon" alt="profile" onclick="location.href='profile.html'">
+    <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+    <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+    <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
   </div>
-
 </div>
+
 
 <!-- LEFT SIDEBAR -->
 <div class="sidebar" id="sidebar">
@@ -319,11 +316,39 @@ refreshMoneyDisplay();
 
 </script>
 
-
+<script type="module">
+import { Money } from "./money.js";
+</script>
 <script src="money.js"></script>
+<script src="auth.js"></script>
 <script src="money_controls.js"></script>
 <script src="kilowatt.js"></script>
 <script src="recoil.js"></script>
+
+<script type="module">
+import { Money } from "./money.js";
+
+// Get UID of logged-in user
+const uid = localStorage.getItem("uid"); // same as your login system
+
+if (!uid) {
+    // Not logged in, redirect to login page
+    window.location.href = "login.html";
+}
+
+// Function to update the top bar
+function refreshTopBarMoney(balance) {
+    const el = document.getElementById('moneyAmount');
+    if (el) el.textContent = Money.format(balance);
+}
+
+// Subscribe to money changes
+Money.onChange(refreshTopBarMoney);
+
+// Fetch current balance and trigger display
+Money.get(uid).then(refreshTopBarMoney);
+</script>
+
 
 </body>
 </html>

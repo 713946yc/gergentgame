@@ -1,18 +1,55 @@
-// money_controls.js
-const handleDeposit = () => {
-    window.location.href = 'money_transfer.html?action=deposit';
-};
+import { Money } from "./money.js";
 
-const handleWithdraw = () => {
-    window.location.href = 'money_transfer.html?action=withdraw';
-};
+const uid = localStorage.getItem("uid");
+if (!uid) {
+    alert("You must be logged in!");
+    window.location.href = "login.html";
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const depositBtn = document.getElementById('depositBtn');
-    const withdrawBtn = document.getElementById('withdrawBtn');
+// DOM Elements
+const balanceEl = document.getElementById("moneyAmount");
+const addBtn = document.getElementById("addMoneyBtn");
+const subBtn = document.getElementById("subtractMoneyBtn");
+const addInput = document.getElementById("addAmount");
+const subInput = document.getElementById("subAmount");
 
-    if (depositBtn) depositBtn.addEventListener('click', handleDeposit);
-    if (withdrawBtn) withdrawBtn.addEventListener('click', handleWithdraw);
+// Update balance display
+async function refreshBalance() {
+    const balance = await Money.get(uid);
+    if (balanceEl) balanceEl.textContent = Money.format(balance);
+}
 
-    if (typeof refreshMoney === 'function') refreshMoney();
+// Listen for Money changes
+Money.onChange(refreshBalance);
+refreshBalance();
+
+// --- Add Money ---
+addBtn.addEventListener("click", async () => {
+    const amount = parseFloat(addInput.value);
+    if (isNaN(amount) || amount <= 0) {
+        alert("Enter a valid positive number to add.");
+        return;
+    }
+    await Money.add(uid, amount);
+    addInput.value = "";
+    refreshBalance();
+});
+
+// --- Subtract Money ---
+subBtn.addEventListener("click", async () => {
+    const amount = parseFloat(subInput.value);
+    if (isNaN(amount) || amount <= 0) {
+        alert("Enter a valid positive number to subtract.");
+        return;
+    }
+
+    const current = await Money.get(uid);
+    if (current < amount) {
+        alert("Not enough balance!");
+        return;
+    }
+
+    await Money.sub(uid, amount);
+    subInput.value = "";
+    refreshBalance();
 });

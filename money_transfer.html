@@ -3,79 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Money Transfer</title>
-
-<!-- Nunito Font -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* GLOBAL */
-body {
-    background-color: #150d23;
-    margin: 0;
-    font-family: "Nunito", sans-serif;
-    color: white;
+/* --- GLOBAL STYLES --- */
+body { 
+    background-color: #150d23; 
+    margin: 0; 
+    font-family: "Nunito", sans-serif; 
+    color: white; 
 }
 
 /* TOP BAR */
 .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: fixed; top: 0; left: 0; width: 100%;
     background-color: #10001f;
     padding: 12px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
     z-index: 20;
 }
 
-/* SIDEBAR */
-.sidebar {
-    position: fixed;
-    top: 65px;
-    left: 0;
-    width: 60px;
-    height: 100vh;
-    background-color: #10001f;
-    padding-top: 60px;
-    overflow-x: hidden;
-    transition: width 0.25s ease;
-    z-index: 10;
-}
-
-.sidebar.open { width: 180px; }
-
-.sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 18px;
-    cursor: pointer;
-    color: white;
-}
-
-.sidebar-item:hover {
-    background-color: #30005e;
-    border-radius: 8px;
-}
-
-.sidebar-text {
-    opacity: 0;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
-    font-size: 16px;
-}
-.sidebar.open .sidebar-text { opacity: 1; }
-
-/* ICONS */
-.home-icon, .cases-icon, .inventory-icon, .trade-icon {
-    width: 24px;
-    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg);
-    transform: translateY(-5%);
-}
-
-/* MENU ICON */
+/* Hamburger Menu */
 .menu-icon {
     position: absolute;
     left: 17px;
@@ -87,57 +35,81 @@ body {
     gap: 5px;
 }
 .menu-icon div {
-    width: 26px;
-    height: 3px;
+    width: 26px; height: 3px;
     background-color: #88719e;
     border-radius: 3px;
 }
 
-/* CENTER MONEY BOX */
-.center-group {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
+/* Money Display */
 .center-box {
-  background-color: #88719e;
-  padding: 10px 16px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  font-size: 16px;
+    background-color: #88719e;
+    padding: 10px 16px;
+    border-radius: 6px;
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 700; font-size: 16px;
 }
 
-/* WALLET BUTTON — full size restored */
+.center-group {
+    display: flex; align-items: center; gap: 5px;
+}
+
 .wallet-btn {
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  font-family: "Nunito", sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 16px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
 }
 .wallet-btn:hover { background-color: #28b863; }
 
-/* TOP RIGHT ICONS */
 .settings-icon, .rewards-icon, .profile-icon {
-    position: absolute;
-    top: 50%;
+    position: absolute; top: 50%;
     transform: translateY(-50%);
-    width: 22px;
+    width: 22px; cursor: pointer;
+    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg);
+}
+.settings-icon { right: 20px; }
+.profile-icon { right: 60px; }
+.rewards-icon { right: 100px; }
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed; top: 65px; left: 0;
+    width: 60px; height: 100vh;
+    background-color: #10001f;
+    padding-top: 60px;
+    overflow-x: hidden;
+    transition: width 0.25s ease;
+    z-index: 10;
+}
+.sidebar.open { width: 180px; }
+
+.sidebar-item {
+    display: flex; align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
     cursor: pointer;
+    color: white;
+}
+.sidebar-item:hover {
+    background-color: #30005e;
+    border-radius: 8px;
+}
+
+.sidebar-icon {
+    width: 24px;
     filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg);
 }
 
-.settings-icon { right: 20px; }
-.profile-icon  { right: 60px; }
-.rewards-icon  { right: 100px; }
+.sidebar-text {
+    opacity: 0; white-space: nowrap;
+    transition: opacity 0.2s ease;
+    font-size: 16px;
+}
+.sidebar.open .sidebar-text { opacity: 1; }
 
 /* TRANSFER BOX */
 .transfer-box {
@@ -166,8 +138,7 @@ body {
 }
 
 .transfer-buttons {
-    display: flex;
-    gap: 15px;
+    display: flex; gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -208,15 +179,16 @@ body {
     background: #6d35c7;
     color: white;
 }
-#confirmBtn:hover { transform: scale(1.03); }
-
+#confirmBtn:hover {
+    transform: scale(1.03);
+}
 </style>
 </head>
 <body>
 
+
 <!-- TOP BAR -->
 <div class="topbar">
-
     <div class="menu-icon" onclick="toggleSidebar()">
         <div></div><div></div><div></div>
     </div>
@@ -225,41 +197,43 @@ body {
         <div class="center-box">
             <span id="moneyAmount">$0.00</span>
         </div>
-
-        <!-- Wallet button full size now -->
-        <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+        <button class="wallet-btn">Wallet</button>
+        <img class="settings-icon" src="images/settings.png" onclick="location.href='settings.html'">
+        <img class="rewards-icon" src="images/rewards.png" onclick="location.href='rewards.html'">
+        <img class="profile-icon" src="images/profile.png" onclick="location.href='profile.html'">
     </div>
-
-    <img class="settings-icon" src="images/settings.png" onclick="location.href='settings.html'">
-    <img class="rewards-icon" src="images/rewards.png" onclick="location.href='rewards.html'">
-    <img class="profile-icon" src="images/profile.png" onclick="location.href='profile.html'">
-
 </div>
 
-<!-- SIDEBAR -->
+
+<!-- SIDEBAR (FIXED VERSION WITH ICONS) -->
 <div class="sidebar" id="sidebar">
+
     <div class="sidebar-item" onclick="location.href='index.html'">
-        <img src="images/home.png" class="home-icon"><span class="sidebar-text">Home</span>
+        <img src="images/home.png" class="sidebar-icon">
+        <span class="sidebar-text">Home</span>
     </div>
 
     <div class="sidebar-item" onclick="location.href='casepage.html'">
-        <img src="images/cases.png" class="cases-icon"><span class="sidebar-text">Cases</span>
+        <img src="images/cases.png" class="sidebar-icon">
+        <span class="sidebar-text">Cases</span>
     </div>
 
     <div class="sidebar-item" onclick="location.href='inventory.html'">
-        <img src="images/inventory.png" class="inventory-icon"><span class="sidebar-text">Inventory</span>
+        <img src="images/inventory.png" class="sidebar-icon">
+        <span class="sidebar-text">Inventory</span>
     </div>
 
     <div class="sidebar-item" onclick="location.href='tradeup.html'">
-        <img src="images/trade.png" class="trade-icon"><span class="sidebar-text">Trade Ups</span>
+        <img src="images/trade.png" class="sidebar-icon">
+        <span class="sidebar-text">Trade Ups</span>
     </div>
+
 </div>
+
 
 <!-- MONEY TRANSFER BOX -->
 <div class="transfer-box">
-
     <div class="transfer-title">Money Transfer</div>
-
     <div class="balance-text">Balance: <span id="moneyAmount2">$0.00</span></div>
 
     <div class="transfer-buttons">
@@ -268,59 +242,68 @@ body {
     </div>
 
     <input id="amountInput" type="number" placeholder="Enter amount ($)" min="0.01" step="0.01">
-
     <button id="confirmBtn">DEPOSIT</button>
-
 </div>
 
-<script src="money.js"></script>
-<script>
-function toggleSidebar(){ document.getElementById("sidebar").classList.toggle("open"); }
 
-/* Sync money displays */
-function refreshMoney(){
-    document.getElementById("moneyAmount").textContent = Money.format(Money.get());
-    document.getElementById("moneyAmount2").textContent = Money.format(Money.get());
+<!-- SCRIPT -->
+<script type="module">
+import { Money } from "./money.js";
+
+// Toggle Sidebar
+window.toggleSidebar = () => {
+    document.getElementById("sidebar").classList.toggle("open");
+};
+
+// Get user
+const uid = localStorage.getItem("uid");
+if (!uid) window.location.href = "login.html";
+
+// Update money display
+function refreshMoneyDisplay(balance) {
+    document.getElementById('moneyAmount').textContent = Money.format(balance);
+    document.getElementById('moneyAmount2').textContent = Money.format(balance);
 }
-Money.onChange(refreshMoney);
-refreshMoney();
+Money.onChange(refreshMoneyDisplay);
+Money.get(uid).then(refreshMoneyDisplay);
 
-/* Mode buttons */
+// Mode buttons
 let mode = "deposit";
-
 const depBtn = document.getElementById("depositBtn");
 const witBtn = document.getElementById("withdrawBtn");
-const confirm = document.getElementById("confirmBtn");
+const confirmBtn = document.getElementById("confirmBtn");
 
 depBtn.onclick = () => {
     mode = "deposit";
     depBtn.classList.add("active");
     witBtn.classList.remove("active");
-    confirm.textContent = "DEPOSIT";
+    confirmBtn.textContent = "DEPOSIT";
 };
 witBtn.onclick = () => {
     mode = "withdraw";
     witBtn.classList.add("active");
     depBtn.classList.remove("active");
-    confirm.textContent = "WITHDRAW";
+    confirmBtn.textContent = "WITHDRAW";
 };
 
-confirm.onclick = () => {
+// Confirm
+confirmBtn.onclick = async () => {
     let amount = parseFloat(document.getElementById("amountInput").value);
-
-    if (!amount || amount <= 0) return alert("Enter a valid amount!");
+    if (!amount || amount <= 0) return;
 
     amount = Math.round(amount * 100) / 100;
 
-    if (mode === "deposit") Money.add(amount);
-    else {
-        if (Money.get() < amount) return alert("Not enough balance!");
-        Money.sub(amount);
+    if (mode === "deposit") {
+        await Money.add(uid, amount);
+    } else {
+        const current = await Money.get(uid);
+        if (current < amount) return;
+        await Money.sub(uid, amount);
     }
 
-    refreshMoney();
-    alert("Transaction complete!");
+    Money.get(uid).then(refreshMoneyDisplay);
 };
+
 </script>
 
 </body>

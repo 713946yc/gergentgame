@@ -210,22 +210,10 @@
     color: #c7b2df;
   }
 
-  .settings-input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 8px;
-    background-color: #2a1a3f;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-family: "Nunito";
-  }
-
-  .save-btn {
+  .logout-btn {
     width: 100%;
     padding: 12px;
-    background-color: #2ecc71;
+    background-color: #c0392b;
     color: white;
     border: none;
     border-radius: 8px;
@@ -234,24 +222,8 @@
     margin-top: 20px;
     cursor: pointer;
   }
-
-  .save-btn:hover {
-    background-color: #28b863;
-  }
-
-  /* Make input and button exactly same width */
-  .settings-input,
-  .save-btn {
-    box-sizing: border-box;
-  }
-
-  /* Green "Username Saved!" text */
-  .username-saved {
-    color: #2ecc71;
-    font-family: "Nunito", sans-serif;
-    font-weight: 700;
-    margin-top: 10px;
-    display: none;
+  .logout -btn:hover {
+    background-color: #a5281e;
   }
 </style>
 
@@ -260,24 +232,21 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-
   <div class="menu-icon" onclick="toggleSidebar()">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div></div><div></div><div></div>
   </div>
 
   <div class="center-group">
     <div class="center-box">
-        <span id="moneyAmount" class="amount">$0.00</span>
+      <span id="moneyAmount">$0.00</span>
     </div>
     <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
-    <img src="images/settings.png" class="settings-icon" alt="settings" onclick="location.href='settings.html'">
-    <img src="images/rewards.png" class="rewards-icon" alt="rewards" onclick="location.href='rewards.html'">
-    <img src="images/profile.png" class="profile-icon" alt="profile" onclick="location.href='profile.html'">
+    <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+    <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+    <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
   </div>
-
 </div>
+
 
 <!-- LEFT SIDEBAR -->
 <div class="sidebar" id="sidebar">
@@ -304,56 +273,70 @@
 
 </div>
 
-<!-- PROFILE SETTINGS PANEL -->
 <div class="settings-container">
 
-  <div class="settings-title">Profile</div>
+  <div class="settings-title">Settings</div>
 
-  <label class="settings-label">Username</label>
-  <input type="text" id="usernameInput" class="settings-input" placeholder="Enter username">
-
-  <button class="save-btn" onclick="saveUsername()">Save Username</button>
-
-  <!-- Green status message -->
-  <div id="usernameSavedMsg" class="username-saved">
-    Username Saved!
-  </div>
+  <!-- FIXED: now calls resetGame(), not resetSettings() -->
+  <button class="logout-btn  " onclick="logoutUser()">Log Out</button>
 
 </div>
 
+
 <!-- GAME / MONEY SCRIPTS -->
+<script type="module">
+import { Money } from "./money.js";
+</script>
+<script src="auth.js"></script>
 <script src="money.js"></script>
 <script src="money_controls.js"></script>
 <script src="kilowatt.js"></script>
 <script src="recoil.js"></script>
+
+<script type="module">
+import { Money } from "./money.js";
+
+// Get UID of logged-in user
+const uid = localStorage.getItem("uid"); // same as your login system
+
+if (!uid) {
+    // Not logged in, redirect to login page
+    window.location.href = "login.html";
+}
+
+// Function to update the top bar
+function refreshTopBarMoney(balance) {
+    const el = document.getElementById('moneyAmount');
+    if (el) el.textContent = Money.format(balance);
+}
+
+// Subscribe to money changes
+Money.onChange(refreshTopBarMoney);
+
+// Fetch current balance and trigger display
+Money.get(uid).then(refreshTopBarMoney);
+</script>
+
+
+<script>
+function logoutUser() {
+    // Clear login info
+    localStorage.removeItem("uid");
+    localStorage.removeItem("username");
+    // Redirect to login page
+    window.location.href = "login.html";
+}
+
+// Make sure it is accessible globally (in case of modules)
+window.logoutUser = logoutUser;
+</script>
+
 
 <script>
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* Save username and show green text */
-function saveUsername() {
-  const username = document.getElementById("usernameInput").value.trim();
-  const msg = document.getElementById("usernameSavedMsg");
-
-  if (username === "") {
-    msg.style.display = "none"; // hide success if empty
-    alert("Username cannot be empty!");
-    return;
-  }
-
-  localStorage.setItem("username", username);
-
-  // Show green message
-  msg.style.display = "block";
-  msg.textContent = "Username Saved!";
-
-  // Optional: keep it visible; remove this timeout if you want it to stay
-  setTimeout(() => {
-    msg.style.display = "none";
-  }, 3000);
-}
 
 /* Money display logic */
 function refreshMoneyDisplay() {

@@ -14,28 +14,21 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-
   <div class="menu-icon" onclick="toggleSidebar()">
-    <div></div>
-    <div></div>
-    <div></div>
+    <div></div><div></div><div></div>
   </div>
 
   <div class="center-group">
-      <div class="center-box">
-          <span id="moneyAmount">$0.00</span>
-      </div>
-
-      <button class="wallet-btn" onclick="location.href='money_transfer.html'">
-        Wallet
-      </button>
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+    <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+    <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+    <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
   </div>
-
-  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
-  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
-  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
-
 </div>
+
 
 
 <!-- SIDEBAR -->
@@ -73,7 +66,9 @@
     <div id="topButtons">
         <button id="sellAllBtn">Sell All</button>
         <button id="sellSelectedBtn" style="display:none;">Sell Selected (0)</button>
+        <button id="selectAllBtn">Select All</button>
     </div>
+
 </div>
 
 <!-- FILTER BAR -->
@@ -82,14 +77,15 @@
 
     <select id="rarityFilter">
         <option value="">All Rarities</option>
-        <option value="gray">Consumer (Gray)</option>
-        <option value="lightblue">Industrial (Light Blue)</option>
-        <option value="blue">Mil-Spec (Blue)</option>
-        <option value="purple">Restricted (Purple)</option>
-        <option value="pink">Classified (Pink)</option>
-        <option value="red">Covert (Red)</option>
-        <option value="yellow">Exceedingly Rare (Gold)</option>
+        <option value="consumer_grade">Consumer Grade</option>
+        <option value="industrial_grade">Industrial Grade</option>
+        <option value="mil_spec">Mil-Spec</option>
+        <option value="restricted">Restricted</option>
+        <option value="classified">Classified</option>
+        <option value="covert">Covert</option>
+        <option value="exceedingly_rare">Exceedingly Rare</option>
     </select>
+
 
     <select id="sortOrder">
         <option value="newest">Sort By: Newest</option>
@@ -108,19 +104,14 @@
 <!-- INVENTORY GRID -->
 <div id="inventoryGrid"></div>
 
-<script src="money.js"></script>
-<script src="money_controls.js"></script>
-<script src="inventory.js"></script>
-
 <script>
-
-
-function refreshMoneyDisplay() {
-     document.getElementById('moneyAmount').textContent = Money.format(Money.get());
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("open");
 }
-Money.onChange(refreshMoneyDisplay);
-refreshMoneyDisplay();
 </script>
+
+<script src="auth.js"></script>
+<script type="module" src="inventory.js"></script>
 
 </body>
 </html>

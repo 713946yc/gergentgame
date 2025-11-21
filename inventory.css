@@ -70,12 +70,12 @@ body {
     z-index: 10;
 }
 
-  /* EXPANDED SIDEBAR */
+/* EXPANDED SIDEBAR */
 .sidebar.open {
     width: 180px;
 }
 
-  /* SIDEBAR ITEMS */
+/* SIDEBAR ITEMS */
 .sidebar-item {
     display: flex;
     align-items: center;
@@ -91,13 +91,13 @@ body {
     border-radius: 8px;
 }
 
-  /* ICONS */
+/* ICONS */
 .sidebar-icon {
     width: 24px;
     height: 24px;
 }
 
-  /* TEXT LABELS */
+/* TEXT LABELS */
 .sidebar-text {
     opacity: 0;
     white-space: nowrap;
@@ -168,7 +168,6 @@ body {
     background-color: #28b863;
 }
 
-
 /* PAGE TITLE */
 .page-title {
     margin-left: 120px;
@@ -195,19 +194,43 @@ body {
     font-weight: 800;
 }
 
-/* SELL BUTTONS */
+/* SELL BUTTONS BAR */
+#topButtons {
+    display: flex;
+    gap: 10px;
+}
+
+/* UNIFIED BUTTON STYLE */
 #topButtons button {
     background: #30005e;
-    padding: 10px 18px;
+    padding: 10px 14px;
     border: none;
     border-radius: 8px;
     color: white;
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
+    width: 150px;            /* 🔥 all three same width */
+    box-sizing: border-box;
+    text-align: center;
 }
 #topButtons button:hover {
     transform: scale(1.05);
+}
+
+/* Special colors for specific buttons (no padding/width overrides) */
+#sellAllBtn {
+    background:#c0392b;
+}
+#sellAllBtn:hover {
+    background:#e74c3c;
+}
+
+#sellSelectedBtn {
+    background:#2980b9;
+}
+#sellSelectedBtn:hover {
+    background:#3498db;
 }
 
 /* FILTER BAR */
@@ -238,10 +261,69 @@ body {
     gap: 20px;
 }
 
-.inventory-item { background:var(--panel); border-radius:8px; padding:10px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.3); position:relative; border:2px solid transparent; transition:border 0.3s, transform 0.2s; cursor:pointer; } .inventory-item.selected { outline:3px solid #3498db; transform: scale(1.03); } .inventory-item img { width:180px; height:120px; object-fit:cover; border-radius:4px; margin-bottom:5px; } .inventory-item .name { font-weight:700; font-size:1rem; margin-bottom:2px; } .inventory-item .rarity-text { font-size:0.8rem; color:#999; margin-bottom:4px; text-transform: capitalize; } .inventory-item .details { font-size:0.85rem; color: var(--muted); } .inventory-item .price { font-weight:700; color: var(--gold); margin-top:5px; display:block; }
+/* INVENTORY ITEM CARD */
+.inventory-item {
+    background:var(--panel);
+    border-radius:8px;
+    padding:10px;
+    text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,0.3);
+    position:relative;
+    border:2px solid transparent;
+    transition:border 0.3s, transform 0.2s;
+    cursor:pointer;
+}
 
-#sellAllBtn { background:#c0392b; border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:700; font-size:1rem; transition: background 0.2s, transform 0.1s; } #sellAllBtn:hover { transform: scale(1.03); background:#e74c3c; }
+.inventory-item.selected {
+    outline:3px solid #3498db;
+    transform: scale(1.03);
+}
 
-#sellSelectedBtn { background:#2980b9; border:none; color:white; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:700; font-size:1rem; transition: background 0.2s, transform 0.1s; } #sellSelectedBtn:hover { background:#3498db; transform:scale(1.03); }
+.inventory-item img {
+    width:180px;
+    height:120px;
+    object-fit:cover;
+    border-radius:4px;
+    margin-bottom:5px;
+}
 
-.sell-btn { background:#2ecc71; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; margin-top:8px; font-size:0.85rem; font-weight:600; transition:background 0.2s; } .sell-btn:hover { background:#27ae60; } #topButtons button { min-width: 120px; padding: 8px 14px; border-radius: 6px; font-weight:700; cursor:pointer; }
+.inventory-item .name {
+    font-weight:700;
+    font-size:1rem;
+    margin-bottom:2px;
+}
+
+.inventory-item .rarity-text {
+    font-size:0.8rem;
+    color:#999;
+    margin-bottom:4px;
+}
+
+.inventory-item .details {
+    font-size:0.85rem;
+    color: var(--muted);
+}
+
+.inventory-item .price {
+    font-weight:700;
+    color: var(--gold);
+    margin-top:5px;
+    display:block;
+}
+
+/* SELL BUTTON INSIDE CARD */
+.sell-btn {
+    background:#2ecc71;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    border-radius:4px;
+    cursor:pointer;
+    margin-top:8px;
+    font-size:0.85rem;
+    font-weight:600;
+    transition:background 0.2s;
+}
+.sell-btn:hover {
+    background:#27ae60;
+}

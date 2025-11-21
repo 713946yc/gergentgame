@@ -9,6 +9,10 @@ covert - #e9331fff
 exceedingly_rare - #f1c40f
 
 
+export const supabase = createClient(
+  "https://idmjyvjcfulgiyscpfis.supabase.co",
+  "sb_publishable_ryeKvlBtxGXQICpQyRAeoQ_mLskN6mZ"
+);
 
 const RARITIES = [
     // Consumer (Base grade - your largest weight)

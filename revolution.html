@@ -285,21 +285,21 @@ h2 {
 
 <!-- TOP BAR -->
 <div class="topbar">
-    <div class="menu-icon" onclick="toggleSidebar()">
-        <div></div><div></div><div></div>
-    </div>
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
 
-    <div class="center-group">
-        <div class="center-box">
-            <span id="moneyAmount">$0.00</span>
-        </div>
-        <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
     </div>
-
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
     <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
     <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
     <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  </div>
 </div>
+
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
@@ -348,20 +348,67 @@ h2 {
 </div>
 
 <!-- Scripts -->
-<script src="money.js"></script>
-<script src="money_controls.js"></script>
-<script src="revolution.js"></script>
+<script src="auth.js"></script>
+
+<script type="module">
+import { Money } from "./money.js";
+import { initCasePage } from "./case_engine.js";
+
+// UID for the logged-in user
+const uid = localStorage.getItem("uid");
+if (!uid) {
+    window.location.href = "login.html";
+}
+
+// Keep the top bar in sync with balance
+async function refreshMoneyDisplay(balanceOverride) {
+    const el = document.getElementById("moneyAmount");
+    if (!el) return;
+
+    if (typeof balanceOverride === "number") {
+        el.textContent = Money.format(balanceOverride);
+    } else {
+        const current = await Money.get(uid);
+        el.textContent = Money.format(current);
+    }
+}
+
+Money.onChange(refreshMoneyDisplay);
+refreshMoneyDisplay();
+
+// Initialise this case page
+initCasePage({
+    uid,
+    Money,
+    caseKey: "revolution",
+    skinsJsonKey: "revolution",
+    caseCost: 2.35,
+    rarities: [
+        { name: "mil_spec",         weight: 79.92, color: "#4a90e2" },
+        { name: "restricted",       weight: 15.98, color: "#9b59b6" },
+        { name: "classified",       weight: 3.20,  color: "#ff4dafff" },
+        { name: "covert",           weight: 0.64,  color: "#e9331fff" },
+        { name: "exceedingly_rare", weight: 0.26,  color: "#f1c40f" }
+    ],
+    elements: {
+        openBtnId: "openBtn",
+        skipBtnId: "skipBtn",
+        stripId: "strip",
+        stripWrapId: "stripWrap",
+        centerLineId: "centerLine",
+        resultId: "result"
+    },
+    stripLength: 100,
+    winnerIndex: 80,
+    goldRarityName: "exceedingly_rare",
+    onBalanceChange: refreshMoneyDisplay
+});
+</script>
 
 <script>
 function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("open");
 }
-
-function refreshMoneyDisplay() {
-    document.getElementById('moneyAmount').textContent = Money.format(Money.get());
-}
-Money.onChange(refreshMoneyDisplay);
-refreshMoneyDisplay();
 </script>
 
 </body>
