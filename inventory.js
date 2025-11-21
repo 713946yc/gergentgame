@@ -179,7 +179,7 @@ function renderInventory() {
             <img src="${item.image}" alt="${item.name}">
             <div class="name">${nameHTML}</div>
             <div class="rarity-text">${rarityLabel}</div>
-            <div class="details">Wear: ${item.wear} | Float: ${(item.float || 0).toFixed(5)}</div>
+            <div class="details">Wear: ${item.wear} | Float: ${(item.float || 0).toFixed(9)}</div>
             <span class="price">${Money.format(item.price || 0)}</span>
             <button class="sell-btn">Sell</button>
         `;
