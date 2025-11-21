@@ -66,11 +66,15 @@ function rollWearFloat(skin) {
     const high = Math.min(tier.max, maxF);
 
     const floatVal = low + Math.random() * (high - low);
+
     return {
         wearLabel: tier.label,
         wearCode: tier.code,
-        floatValue: Number(floatVal.toFixed(4))
+
+        // 9 decimal places, accurate, CS2 style
+        floatValue: floatVal.toFixed(9)
     };
+
 }
 
 /* ---------------------------------------------------------
