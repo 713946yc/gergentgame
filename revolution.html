@@ -244,11 +244,12 @@ h2 {
     position: absolute;
     left: 50%;
     top: 0;
-    width: 2px;
     height: 100%;
-    background: #f1c40f;
+    width: 2px;
     transform: translateX(-50%);
-    display: none;
+    background-color: yellow;
+    z-index: 20;
+    pointer-events: none;
 }
 
 /* Result box */
@@ -346,6 +347,7 @@ h2 {
     <div id="result"></div>
 
 </div>
+
 
 <!-- Scripts -->
 <script src="auth.js"></script>

@@ -244,11 +244,12 @@ h2 {
     position: absolute;
     left: 50%;
     top: 0;
-    width: 2px;
     height: 100%;
-    background: #f1c40f;
+    width: 2px;
     transform: translateX(-50%);
-    display: none;
+    background-color: yellow;
+    z-index: 20;
+    pointer-events: none;
 }
 
 /* Result box */
@@ -347,6 +348,7 @@ h2 {
 
 </div>
 
+
 <!-- Scripts -->
 <script src="auth.js"></script>
 
@@ -382,14 +384,13 @@ initCasePage({
     Money,
     caseKey: "dreamhack_2014_cobblestone_souvenir",
     skinsJsonKey: "dreamhack_2014_cobblestone_souvenir",
-    caseCost: 1400.0,
+    caseCost: 1400,
     rarities: [
-        { name: "consumer",   weight: 80.0064, color: "#adb4bbff" },
-        { name: "industrial", weight: 16,      color: "#9cc4f1ff" },
-        { name: "mil_spec",   weight: 3.20,    color: "#4a90e2" },
-        { name: "restricted", weight: 0.64,    color: "#9b59b6" },
-        { name: "classified", weight: 0.128,   color: "#ff4dafff" },
-        { name: "covert",     weight: 0.0256,  color: "#e9331fff" }
+        { name: "mil_spec",         weight: 79.92, color: "#4a90e2" },
+        { name: "restricted",       weight: 15.98, color: "#9b59b6" },
+        { name: "classified",       weight: 3.20,  color: "#ff4dafff" },
+        { name: "covert",           weight: 0.64,  color: "#e9331fff" },
+        { name: "exceedingly_rare", weight: 0.26,  color: "#f1c40f" }
     ],
     elements: {
         openBtnId: "openBtn",
@@ -401,7 +402,7 @@ initCasePage({
     },
     stripLength: 100,
     winnerIndex: 80,
-    goldRarityName: "covert",
+    goldRarityName: "exceedingly_rare",
     onBalanceChange: refreshMoneyDisplay
 });
 </script>
