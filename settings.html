@@ -295,59 +295,59 @@ function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle("open");
 }
 
-/* ✔ Your original Reset Game function */
-function resetGame() {
-   if (confirm("Are you sure you want to reset the game? This will wipe your inventory and reset your balance to $10.")) {
-      localStorage.removeItem('inventory');
-      Money.set(10);
-      alert("Game has been reset! Inventory wiped and balance set to $10.00.");
-   }
-}
-
 function refreshMoneyDisplay() {
  document.getElementById('moneyAmount').textContent = Money.format(Money.get());
 }
 Money.onChange(refreshMoneyDisplay);
 
 if (Money.get() === 0) {
-   Money.add(10);
+   Money.add(0);
 }
 refreshMoneyDisplay();
 
 </script>
 
 <script type="module">
-import { Money } from "./money.js";
-</script>
-<script src="money.js"></script>
-<script src="auth.js"></script>
-<script src="money_controls.js"></script>
-<script src="kilowatt.js"></script>
-<script src="recoil.js"></script>
-
-<script type="module">
+import { supabase } from "./supabaseClient.js";
 import { Money } from "./money.js";
 
-// Get UID of logged-in user
-const uid = localStorage.getItem("uid"); // same as your login system
+// Get logged in UID
+const uid = localStorage.getItem("uid");
 
-if (!uid) {
-    // Not logged in, redirect to login page
-    window.location.href = "login.html";
+// --- NEW Supabase Reset Function ---
+async function resetGame() {
+    if (!uid) return;
+
+    // 1. Delete all inventory items for this user
+    await supabase
+        .from("inventory")
+        .delete()
+        .eq("uid", uid);
+
+    // 2. Reset balance to $10.00
+    await Money.set(uid, 0.0);
+
+    // 3. Refresh displayed balance
+    const el = document.getElementById("moneyAmount");
+    el.textContent = Money.format(0);
+
+    // 4. Optional: Visual flash effect instead of alert
+    const settingsBox = document.querySelector(".settings-container");
+    settingsBox.style.boxShadow = "0 0 20px #2ecc71";
+    setTimeout(() => settingsBox.style.boxShadow = "none", 600);
 }
 
-// Function to update the top bar
-function refreshTopBarMoney(balance) {
-    const el = document.getElementById('moneyAmount');
-    if (el) el.textContent = Money.format(balance);
+// Attach reset to the button
+window.resetGame = resetGame;
+
+// Refresh top bar balance on load
+if (uid) {
+    Money.get(uid).then(balance => {
+        document.getElementById("moneyAmount").textContent = Money.format(balance);
+    });
 }
-
-// Subscribe to money changes
-Money.onChange(refreshTopBarMoney);
-
-// Fetch current balance and trigger display
-Money.get(uid).then(refreshTopBarMoney);
 </script>
+
 
 
 </body>

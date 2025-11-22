@@ -142,9 +142,19 @@ export function initCasePage(options) {
         };
     }
 
-    /* ---------------- Build the scrolling strip ---------------- */
     function buildStrip(winnerSkin) {
         strip.innerHTML = "";
+
+        // Default mystery image
+        let mysteryImg = "images/mystery.png";
+
+        // Case-specific mystery images
+        if (skinsJsonKey === "kilowatt") {
+            mysteryImg = "images/mystery_kukri.png";
+        } 
+        else if (skinsJsonKey === "fever") {
+            mysteryImg = "images/mystery_fever.png";
+        }
 
         for (let i = 0; i < stripLength; i++) {
             const tile = document.createElement("div");
@@ -155,8 +165,9 @@ export function initCasePage(options) {
 
             tile.style.backgroundColor = skin.color;
 
+            // Exceedingly rare winner → show mystery image (custom per case)
             if (isWinner && skin.rarity === goldRarityName) {
-                tile.style.backgroundImage = "url('images/mystery.png')";
+                tile.style.backgroundImage = `url('${mysteryImg}')`;
             } else {
                 tile.style.backgroundImage = `url(${skin.image})`;
             }
@@ -164,6 +175,8 @@ export function initCasePage(options) {
             strip.appendChild(tile);
         }
     }
+
+
 
     function getTileStep() {
         const t = strip.querySelector(".tile");

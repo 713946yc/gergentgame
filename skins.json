@@ -437,5 +437,85 @@
       { "name": "Driver Gloves | Snow Leopard", "image": "images/drivergloves_snowleopard.webp", "float_range": "0.06-0.80", "price": { "FN": "2391.77", "MW": "682.35", "FT": "326.27", "WW": "277.16", "BS": "244.80" }, "stattrak_available": false },
       { "name": "Sport Gloves | Nocts", "image": "images/sportgloves_nocts.webp", "float_range": "0.06-0.80", "price": { "FN": "3475.10", "MW": "1493.38", "FT": "616.90", "WW": "588.59", "BS": "455.88" }, "stattrak_available": false }
     ]
+  },
+    "fever": {
+    "mil_spec": [
+      { "name": "MAG-7 | Resupply", "image": "images/mag7_resupply.webp", "float_range": "0.00-1.00", "price": { "FN": "0.50", "MW": "0.14", "FT": "0.06", "WW": "0.06", "BS": "0.05" }, "stattrak_available": true },
+      { "name": "P2000 | Sure Grip", "image": "images/p2000_suregrip.webp", "float_range": "0.00-0.90", "price": { "FN": "0.53", "MW": "0.13", "FT": "0.05", "WW": "0.05", "BS": "0.05" }, "stattrak_available": true },
+      { "name": "XM1014 | Mockingbird", "image": "images/xm1014_mockingbird.webp", "float_range": "0.00-1.00", "price": { "FN": "0.54", "MW": "0.15", "FT": "0.06", "WW": "0.05", "BS": "0.05" }, "stattrak_available": true },
+      { "name": "MP9 | Nexus", "image": "images/mp9_nexus.webp", "float_range": "0.00-1.00", "price": { "FN": "0.64", "MW": "0.15", "FT": "0.06", "WW": "0.06", "BS": "0.05" }, "stattrak_available": true },
+      { "name": "SSG 08 | Memorial", "image": "images/ssg08_memorial.webp", "float_range": "0.00-1.00", "price": { "FN": "0.76", "MW": "0.16", "FT": "0.07", "WW": "0.06", "BS": "0.05" }, "stattrak_available": true },
+      { "name": "M4A4 | Choppa", "image": "images/m4a4_choppa.webp", "float_range": "0.00-1.00", "price": { "FN": "1.50", "MW": "0.17", "FT": "0.08", "WW": "0.06", "BS": "0.06" }, "stattrak_available": true },
+      { "name": "USP-S | PC-GRN", "image": "images/usps_pcgrn.webp", "float_range": "0.00-0.90", "price": { "FN": "1.08", "MW": "0.20", "FT": "0.12", "WW": "0.11", "BS": "0.10" }, "stattrak_available": true }
+    ],
+
+    "restricted": [
+      { "name": "P90 | Wave Breaker", "image": "images/p90_wavebreaker.webp", "float_range": "0.00-0.95", "price": { "FN": "4.20", "MW": "0.94", "FT": "0.43", "WW": "0.40", "BS": "0.39" }, "stattrak_available": true },
+      { "name": "Galil AR | Control", "image": "images/galil_control.webp", "float_range": "0.00-0.80", "price": { "FN": "2.54", "MW": "0.83", "FT": "0.46", "WW": "0.42", "BS": "0.31" }, "stattrak_available": true },
+      { "name": "Nova | Rising Sun", "image": "images/nova_risingsun.webp", "float_range": "0.00-1.00", "price": { "FN": "3.94", "MW": "0.97", "FT": "0.44", "WW": "0.39", "BS": "0.39" }, "stattrak_available": true },
+      { "name": "Zeus x27 | Tosai", "image": "images/zeusx27_tosai.webp", "float_range": "0.00-0.70", "price": { "FN": "2.15", "MW": "0.76", "FT": "0.43", "WW": "0.42", "BS": "0.41" }, "stattrak_available": true },
+      { "name": "Desert Eagle | Serpent Strike", "image": "images/deserteagle_serpentstrike.webp", "float_range": "0.00-0.90", "price": { "FN": "2.46", "MW": "0.93", "FT": "0.48", "WW": "0.45", "BS": "0.44" }, "stattrak_available": true }
+    ],
+
+    "classified": [
+      { "name": "UMP-45 | K.O. Factory", "image": "images/ump45_kofactory.webp", "float_range": "0.00-1.00", "price": { "FN": "20.19", "MW": "7.23", "FT": "4.01", "WW": "3.74", "BS": "3.73" }, "stattrak_available": true },
+      { "name": "Glock-18 | Shinobu", "image": "images/glock18_shinobu.webp", "float_range": "0.00-1.00", "price": { "FN": "26.19", "MW": "8.52", "FT": "4.35", "WW": "4.09", "BS": "4.05" }, "stattrak_available": true },
+      { "name": "AK-47 | Searing Rage", "image": "images/ak47_searingrage.webp", "float_range": "0.00-1.00", "price": { "FN": "32.72", "MW": "7.70", "FT": "4.43", "WW": "4.12", "BS": "3.92" }, "stattrak_available": true }
+    ],
+
+    "covert": [
+      { "name": "AWP | Printstream", "image": "images/awp_printstream.webp", "float_range": "0.00-1.00", "price": { "FN": "306.95", "MW": "100.92", "FT": "47.44", "WW": "41.42", "BS": "41.29" }, "stattrak_available": true },
+      { "name": "FAMAS | Bad Trip", "image": "images/famas_badtrip.webp", "float_range": "0.00-1.00", "price": { "FN": "70.02", "MW": "41.89", "FT": "40.65", "WW": "40.32", "BS": "39.90" }, "stattrak_available": true }
+    ],
+
+    "exceedingly_rare": [
+      { "name": "Nomad Knife | Doppler Phase 4", "image": "images/nomadknife_doppler_phase4.png", "float_range": "0.00-0.08", "price": { "FN": "696.58.81", "MW": "457.23", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Doppler Ruby", "image": "images/nomadknife_doppler_ruby.png", "float_range": "0.00-0.08", "price": { "FN": "1650.00", "MW": "1649.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Doppler Sapphire", "image": "images/nomadknife_doppler_sapphire.png", "float_range": "0.00-0.08", "price": { "FN": "1111.77", "MW": "1084.99", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Black Pearl", "image": "images/paracordknife_doppler_blackpearl.png", "float_range": "0.00-0.08", "price": { "FN": "780.00", "MW": "748.75", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Phase 1", "image": "images/paracordknife_doppler_phase1.png", "float_range": "0.00-0.08", "price": { "FN": "271.05", "MW": "231.10", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Phase 2", "image": "images/paracordknife_doppler_phase2.png", "float_range": "0.00-0.08", "price": { "FN": "327.28", "MW": "266.55", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Phase 3", "image": "images/paracordknife_doppler_phase3.png", "float_range": "0.00-0.08", "price": { "FN": "301.56", "MW": "224.99", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Phase 4", "image": "images/paracordknife_doppler_phase4.png", "float_range": "0.00-0.08", "price": { "FN": "362.55", "MW": "238.51", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Ruby", "image": "images/paracordknife_doppler_ruby.png", "float_range": "0.00-0.08", "price": { "FN": "899.00", "MW": "765.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Doppler Sapphire", "image": "images/paracordknife_doppler_sapphire.png", "float_range": "0.00-0.08", "price": { "FN": "678.71", "MW": "525.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Doppler Black Pearl", "image": "images/skeletonknife_doppler_blackpearl.png", "float_range": "0.00-0.08", "price": { "FN": "2721.15", "MW": "2441.85", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Doppler Phase 1", "image": "images/skeletonknife_doppler_phase1.png", "float_range": "0.00-0.08", "price": { "FN": "709.69", "MW": "689.61", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Doppler Phase 2", "image": "images/skeletonknife_doppler_phase2.png", "float_range": "0.00-0.08", "price": { "FN": "1000.00", "MW": "979.15", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Doppler Phase 3", "image": "images/skeletonknife_doppler_phase3.png", "float_range": "0.00-0.08", "price": { "FN": "830.00", "MW": "683.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Doppler Ruby", "image": "images/skeletonknife_doppler_ruby.png", "float_range": "0.00-0.08", "price": { "FN": "3703.78", "MW": "3537.81", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Doppler Sapphire", "image": "images/skeletonknife_doppler_sapphire.png", "float_range": "0.00-0.08", "price": { "FN": "2143.63", "MW": "2016.40", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Black Pearl", "image": "images/survivalknife_doppler_blackpearl.png", "float_range": "0.00-0.08", "price": { "FN": "631.59", "MW": "570.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Phase 1", "image": "images/survivalknife_doppler_phase1.png", "float_range": "0.00-0.08", "price": { "FN": "278.42", "MW": "208.84", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Phase 2", "image": "images/survivalknife_doppler_phase2.png", "float_range": "0.00-0.08", "price": { "FN": "278.52", "MW": "244.69", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Phase 3", "image": "images/survivalknife_doppler_phase3.png", "float_range": "0.00-0.08", "price": { "FN": "278.18", "MW": "209.19", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Phase 4", "image": "images/survivalknife_doppler_phase4.png", "float_range": "0.00-0.08", "price": { "FN": "289.52", "MW": "216.84", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Ruby", "image": "images/survivalknife_doppler_ruby.png", "float_range": "0.00-0.08", "price": { "FN": "766.40", "MW": "641.81", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Survival Knife | Doppler Sapphire", "image": "images/survivalknife_doppler_sapphire.png", "float_range": "0.00-0.08", "price": { "FN": "510.32", "MW": "438.88", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Rust Coat", "image": "images/paracordknife_rustcoat.png", "float_range": "0.40-1.00", "price": { "FN": "0.00", "MW": "0.00", "FT": "0.00", "WW": "59.09", "BS": "52.97" }, "stattrak_available": true },
+      { "name": "Survival Knife | Ultraviolet", "image": "images/survivalknife_ultraviolet.png", "float_range": "0.06-0.80", "price": { "FN": "211.05", "MW": "77.69", "FT": "68.00", "WW": "65.48", "BS": "64.34" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Ultraviolet", "image": "images/paracordknife_ultraviolet.png", "float_range": "0.06-0.80", "price": { "FN": "230.39", "MW": "97.63", "FT": "71.80", "WW": "71.33", "BS": "65.34" }, "stattrak_available": true },
+      { "name": "Survival Knife | Rust Coat", "image": "images/survivalknife_rustcoat.png", "float_range": "0.40-1.00", "price": { "FN": "0.00", "MW": "0.00", "FT": "0.00", "WW": "64.98", "BS": "52.69" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Damascus Steel", "image": "images/paracordknife_damascussteel.png", "float_range": "0.00-0.50", "price": { "FN": "79.46", "MW": "71.87", "FT": "68.33", "WW": "66.83", "BS": "66.83" }, "stattrak_available": true },
+      { "name": "Survival Knife | Damascus Steel", "image": "images/survivalknife_damascussteel.png", "float_range": "0.00-0.50", "price": { "FN": "80.90", "MW": "67.95", "FT": "67.88", "WW": "64.56", "BS": "63.98" }, "stattrak_available": true },
+      { "name": "Survival Knife | Marble Fade", "image": "images/survivalknife_marblefade.png", "float_range": "0.00-0.08", "price": { "FN": "175.86", "MW": "147.73", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Rust Coat", "image": "images/nomadknife_rustcoat.png", "float_range": "0.40-1.00", "price": { "FN": "0.00", "MW": "0.00", "FT": "0.00", "WW": "113.82", "BS": "99.03" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Tiger Tooth", "image": "images/paracordknife_tigertooth.png", "float_range": "0.00-0.08", "price": { "FN": "149.99", "MW": "129.49", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Ultraviolet", "image": "images/nomadknife_ultraviolet.png", "float_range": "0.06-0.80", "price": { "FN": "381.12", "MW": "161.29", "FT": "120.00", "WW": "113.59", "BS": "104.76" }, "stattrak_available": true },
+      { "name": "Survival Knife | Tiger Tooth", "image": "images/survivalknife_tigertooth.png", "float_range": "0.00-0.08", "price": { "FN": "152.49", "MW": "124.40", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Ultraviolet", "image": "images/skeletonknife_ultraviolet.png", "float_range": "0.06-0.80", "price": { "FN": "618.95", "MW": "240.00", "FT": "201.50", "WW": "198.02", "BS": "187.59" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Marble Fade", "image": "images/skeletonknife_marblefade.png", "float_range": "0.00-0.08", "price": { "FN": "460.76", "MW": "439.68", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Damascus Steel", "image": "images/nomadknife_damascussteel.png", "float_range": "0.00-0.50", "price": { "FN": "155.47", "MW": "147.57", "FT": "140.56", "WW": "135.40", "BS": "131.57" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Damascus Steel", "image": "images/skeletonknife_damascussteel.png", "float_range": "0.00-0.50", "price": { "FN": "246.08", "MW": "220.20", "FT": "206.85", "WW": "204.01", "BS": "202.43" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Rust Coat", "image": "images/skeletonknife_rustcoat.png", "float_range": "0.40-1.00", "price": { "FN": "0.00", "MW": "0.00", "FT": "0.00", "WW": "145.00", "BS": "138.19" }, "stattrak_available": true },
+      { "name": "Paracord Knife | Marble Fade", "image": "images/paracordknife_marblefade.png", "float_range": "0.00-0.08", "price": { "FN": "212.36", "MW": "154.77", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Tiger Tooth", "image": "images/nomadknife_tigertooth.png", "float_range": "0.00-0.08", "price": { "FN": "245.41", "MW": "223.28", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Marble Fade", "image": "images/nomadknife_marblefade.png", "float_range": "0.00-0.08", "price": { "FN": "295.01", "MW": "268.02", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Skeleton Knife | Tiger Tooth", "image": "images/skeletonknife_tigertooth.png", "float_range": "0.00-0.08", "price": { "FN": "380.00", "MW": "368.54", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Doppler Black Pearl", "image": "images/nomadknife_doppler_blackpearl.png", "float_range": "0.00-0.08", "price": { "FN": "1852.81", "MW": "1383.76", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Doppler Phase 1", "image": "images/nomadknife_doppler_phase1.png", "float_range": "0.00-0.08", "price": { "FN": "459.61", "MW": "424.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Doppler Phase 2", "image": "images/nomadknife_doppler_phase2.png", "float_range": "0.00-0.08", "price": { "FN": "584.74", "MW": "546.80", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Nomad Knife | Doppler Phase 3", "image": "images/nomadknife_doppler_phase3.png", "float_range": "0.00-0.08", "price": { "FN": "427.97", "MW": "427.08", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true }
+    ]
   }
 }
