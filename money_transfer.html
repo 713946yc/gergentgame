@@ -3,295 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Money Transfer</title>
-
-<!-- Nunito Font -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-/* --- USE PROVIDED CSS --- */
-  body {
-    background-color: #150d23;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 45px;
-    background-color: #10001f;
-    padding: 12px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
-  }
-
-  .sidebar {
-    position: fixed;
-    top: 65px;
-    left: 0;
-    width: 60px;
-    height: 100vh;
-    background-color: #10001f;
-    padding-top: 60px;
-    overflow-x: hidden;
-    transition: width 0.25s ease;
-    z-index: 10;
-  }
-
-  .sidebar.open {
-    width: 180px;
-  }
-
-  .sidebar-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 18px;
-    cursor: pointer;
-    color: white;
-    font-family: "Nunito", sans-serif;
-  }
-
-  .sidebar-item:hover {
-    background-color: #30005e;
-    border-radius: 8px;
-  }
-
-  .sidebar-icon {
-    width: 24px;
-    height: 24px;
-    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
-  }
-
-  .sidebar-text {
-    opacity: 0;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
-    font-size: 16px;
-  }
-
-  .sidebar.open .sidebar-text {
-    opacity: 1;
-  }
-
-  .menu-icon {
-    position: absolute;
-    left: 17px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .menu-icon div {
-    width: 26px;
-    height: 3px;
-    background-color: #88719e;
-    border-radius: 3px;
-  }
-
-  .center-box {
-    background-color: #88719e;
-    padding: 10px 16px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: "Nunito", sans-serif;
-    font-weight: 700;
-    color: white;
-    font-size: 16px;
-  }
-
-  .center-group {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .settings-icon,
-  .rewards-icon,
-  .profile-icon {
-    position: absolute;
-    width: 22px;
-    cursor: pointer;
-    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
-  }
-  .settings-icon { right: 20px; top: 50%; transform: translateY(-50%); }
-  .rewards-icon { right: 100px; top: 50%; transform: translateY(-51%); }
-  .profile-icon { right: 60px; top: 50%; transform: translateY(-51%); }
-
-  .quests-icon {
-    position: absolute;
-    right: 140px;
-    top: 50%;
-    transform: translateY(-47%);
-    width: 22px;
-    cursor: pointer;
-    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
-  }
-
-  .wallet-btn {
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font-family: "Nunito", sans-serif;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  .wallet-btn:hover { background-color: #28b863; }
-
-  #levelContainer {
-    position: absolute;       /* float independently in topbar */
-    top: 50%;                 /* vertical center */
-    left: 60%;                /* start at center of topbar */
-    transform: translateX(120px) translateY(-50%); /* shift right from center */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: "Nunito", sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  #levelBarBackground {
-    width: 250px; /* adjust length of bar */
-    height: 10px;
-    background-color: #300430;
-    border-radius: 5px;
-    margin-top: 4px;
-    overflow: hidden;
-  }
-
-  #levelBarFill {
-    width: 0%;
-    height: 100%;
-    background-color: #fde400;
-    border-radius: 5px;
-    transition: width 0.3s ease;
-  }
-
-  #levelDisplay {
-    font-size: 15px;
-    font-weight: 700;
-    color: #ffffff;       /* lighter gray */
-    margin-bottom: 4px;
-    letter-spacing: 0.5px;
-  }
-
-  #levelBarFill {
-    width: 0%;
-    height: 100%;
-    background-color: #fde400;
-    border-radius: 5px;
-    transition: width 0.3s ease;
-  }
-
-  .transfer-box {
-    margin-left: 120px;
-    margin-top: 100px;
-    background: #1b0d2e;
-    padding: 35px;
-    border-radius: 14px;
-    width: 420px;
-    box-shadow: 0 0 20px rgba(120, 60, 200, 0.5);
-  }
-
-  .transfer-title {
-    font-size: 27px;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: #c8a4ff;
-  }
-
-  .balance-text {
-    font-size: 18px;
-    color: #8ae2ff;
-    margin-top: 10px;
-    margin-bottom: 25px;
-    font-weight: 700;
-  }
-
-  /* ✅ Styled Remaining Deposit Box */
-  #remainingDeposit {
-    background: #251338;
-    padding: 12px 16px;
-    border-radius: 10px;
-    color: #e6d7ff;
-    font-size: 17px;
-    font-weight: 600;
-    border: 2px solid #6a3cff;
-    width: fit-content;
-    margin: 0 auto 20px auto;
-    text-align: center;
-  }
-
-  .transfer-buttons {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-
-  .mode-btn {
-    flex: 1;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 17px;
-    border: none;
-    background: #30005e;
-    color: white;
-  }
-
-  .mode-btn.active { background: #6d35c7; }
-
-  #amountInput {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 8px;
-    background: #140a22;
-    color: white;
-    font-size: 18px;
-    margin-bottom: 20px;
-    text-align: center;
-    box-sizing: border-box;
-  }
-
-  #confirmBtn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 800;
-    font-size: 18px;
-    cursor: pointer;
-    background: #6d35c7;
-    color: white;
-  }
-
-  #confirmBtn:hover { transform: scale(1.03); }
-</style>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/money_transfer.css">
 </head>
 <body>
-
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="menu-icon" onclick="toggleSidebar()"><div></div><div></div><div></div></div>
 
@@ -311,7 +27,6 @@
   <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
 </div>
 
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="sidebar-item" onclick="location.href='index.html'">
     <img src="images/home.png" class="sidebar-icon"><span class="sidebar-text">Home</span>
@@ -327,7 +42,8 @@
   </div>
 </div>
 
-<!-- ✅ TRANSFER BOX -->
+<div id="popupContainer"></div>
+
 <div class="transfer-box">
   <div class="transfer-title">Money Transfer</div>
   <div class="balance-text">Balance: <span id="moneyAmount2">$0.00</span></div>
@@ -344,23 +60,20 @@
 </div>
 
 <script type="module">
-import { Money } from "./money.js";
-import { Xp } from "./xp.js";
-import { getLevel } from "./level.js";
-import { supabase } from "./supabaseClient.js";
-
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+import { supabase } from "./js/supabaseClient.js";
 
 let isProcessing = false;
 
 const uid = localStorage.getItem("uid");
 if (!uid) window.location.href = "login.html";
 
-// 🔹 Sidebar toggle
 window.toggleSidebar = () => {
   document.getElementById("sidebar").classList.toggle("open");
 };
 
-// 🔹 Money display (top bar + box)
 function refreshMoney(balance) {
   document.getElementById("moneyAmount").textContent = Money.format(balance);
   document.getElementById("moneyAmount2").textContent = Money.format(balance);
@@ -368,10 +81,9 @@ function refreshMoney(balance) {
 Money.onChange(refreshMoney);
 Money.get(uid).then(refreshMoney);
 
-// 🔹 LEVEL / XP BAR – SAME SCALING AS SETTINGS
 function updateLevelBar(xp) {
   xp = Number(xp) || 0;
-  const { level, currentXp, xpToNextLevel } = getLevel(xp); // <- SAME scaling source
+  const { level, currentXp, xpToNextLevel } = getLevel(xp);
   const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
 
   const levelDisplay = document.getElementById("levelDisplay");
@@ -386,30 +98,23 @@ function updateLevelBar(xp) {
 Xp.onChange(updateLevelBar);
 Xp.get(uid).then(updateLevelBar);
 
-// 🔹 DEPOSIT TRACKER (persists until reset)
-
-// Helper: compute deposit limit from XP using SAME LEVEL SCALING
 function getDepositLimitFromXp(xp) {
   xp = Number(xp) || 0;
-  const { level } = getLevel(xp); // <- get level from XP, not uid
-  return { level, depositLimit: 1000 + (level - 1) * 500 }; // +$500 per level
+  const { level } = getLevel(xp);
+  return { level, depositLimit: 1000 + (level - 1) * 500 };
 }
 
-// Update “remaining deposit limit” text
 async function refreshDepositRemaining() {
-  // Get XP → determine level → determine limit
   const xp = await Xp.get(uid);
   const { level } = getLevel(xp);
   const depositLimit = 1000 + (level - 1) * 500;
 
-  // Fetch current total deposited from DB
   const { data, error } = await supabase
     .from("deposit_tracker")
     .select("total_deposited")
     .eq("user_id", uid)
     .single();
 
-  // If no row exists yet, assume $0 deposited
   const totalDeposited = data?.total_deposited ?? 0;
 
   const remaining = Math.max(0, depositLimit - totalDeposited);
@@ -418,18 +123,14 @@ async function refreshDepositRemaining() {
     `Remaining deposit limit (Level ${level}): $${remaining}`;
 }
 
-
-// Initial load
 refreshDepositRemaining();
 
-// 🔹 MODE: deposit / withdraw
 let mode = "deposit";
 const depBtn = document.getElementById("depositBtn");
 const witBtn = document.getElementById("withdrawBtn");
 const confirmBtn = document.getElementById("confirmBtn");
 const remainingDepositEl = document.getElementById("remainingDeposit");
 
-// Deposit mode
 depBtn.onclick = () => {
   mode = "deposit";
   depBtn.classList.add("active");
@@ -438,7 +139,6 @@ depBtn.onclick = () => {
   if (remainingDepositEl) remainingDepositEl.style.display = "block";
 };
 
-// Withdraw mode
 witBtn.onclick = () => {
   mode = "withdraw";
   witBtn.classList.add("active");
@@ -447,22 +147,19 @@ witBtn.onclick = () => {
   if (remainingDepositEl) remainingDepositEl.style.display = "none";
 };
 
-// 🔹 CONFIRM ACTION
 confirmBtn.onclick = async () => {
-  if (isProcessing) return unlock();       // ✅ prevents spam dupes
+  if (isProcessing) return unlock();
   isProcessing = true;
-  confirmBtn.disabled = true;     // ✅ optional but recommended
+  confirmBtn.disabled = true;
 
   let amount = parseFloat(document.getElementById("amountInput").value);
   if (!amount || amount <= 0) return unlock();
   amount = Math.round(amount * 100) / 100;
 
   if (mode === "deposit") {
-    // Use XP -> level scaling from level.js
     const xp = await Xp.get(uid);
     const { level, depositLimit } = getDepositLimitFromXp(xp);
 
-    // Get current deposited from DB
     const { data: tracker } = await supabase
       .from("deposit_tracker")
       .select("total_deposited")
@@ -480,7 +177,6 @@ confirmBtn.onclick = async () => {
       return unlock();
     }
 
-
     const { data, error } = await supabase.rpc("safe_deposit", {
       p_uid: uid,
       p_amount: amount
@@ -491,9 +187,8 @@ confirmBtn.onclick = async () => {
       return unlock();
     }
 
-    refreshMoney(data); // new balance returned from DB
+    refreshMoney(data);
     refreshDepositRemaining();
-
 
   } else {
     const { error } = await supabase.rpc("safe_withdraw", {
@@ -508,7 +203,6 @@ confirmBtn.onclick = async () => {
 
   }
 
-  // Refresh money + UI
   const newBalance = await Money.get(uid);
   refreshMoney(newBalance);
   refreshDepositRemaining();
@@ -522,9 +216,8 @@ confirmBtn.onclick = async () => {
     confirmBtn.disabled = false;
     isProcessing = false;
   }
-
-
 };
 </script>
+<script type="module" src="js/popup.js"></script>
 </body>
 </html>

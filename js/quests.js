@@ -2,6 +2,7 @@
 import { supabase } from "./supabaseClient.js";
 import { Xp } from "./xp.js";
 import { Money } from "./money.js";
+import { showPopup } from "./popup.js";
 
 // ------------------ DEFINITIONS ------------------
 
@@ -344,8 +345,13 @@ async function completeQuest(q) {
   await upsertQuestProgress(q.id);
   await grantXp(q.rewardXp);
   await grantMoney(q.rewardMoney);
+
+  // 🔥 POPUP HERE
+  showPopup("quest", "Quest Complete!", q.title);
+
   renderAll();
 }
+
 
 async function completeAchievement(a) {
   const s = achievementState[a.id];
@@ -353,6 +359,9 @@ async function completeAchievement(a) {
   s.completed = true;
   await upsertAchievementProgress(a.id);
   await grantXp(a.rewardXp);
+
+  showPopup("achievement", "Achievement Unlocked!", a.title);
+
   renderAll();
 }
 

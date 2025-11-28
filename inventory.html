@@ -3,22 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Inventory</title>
-
-<!-- Nunito Font -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="inventory.css">
-
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/inventory.css">
 </head>
 <body>
 
-<!-- TOP BAR -->
 <div class="topbar">
   <div class="menu-icon" onclick="toggleSidebar()">
     <div></div><div></div><div></div>
   </div>
 
-  <!-- Centered Money + Wallet -->
   <div class="center-group">
     <div class="center-box">
       <span id="moneyAmount">$0.00</span>
@@ -26,7 +21,6 @@
     <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
   </div>
 
-  <!-- Level bar positioned to the right -->
   <div id="levelContainer">
     <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
     <div id="levelBarBackground">
@@ -34,16 +28,12 @@
     </div>
   </div>
 
-  <!-- Settings / Rewards / Profile icons -->
   <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
   <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
   <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
   <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
 </div>
 
-
-
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
 
   <div class="sidebar-item" onclick="location.href='index.html'">
@@ -68,10 +58,10 @@
 
 </div>
 
-<!-- PAGE TITLE -->
+<div id="popupContainer"></div>
+
 <h1 class="page-title">My Inventory</h1>
 
-<!-- TOP CONTROLS -->
 <div id="inventoryControls">
     <div id="totalValue">Total Value: <b>$0.00</b></div>
 
@@ -80,10 +70,8 @@
         <button id="sellSelectedBtn" style="display:none;">Sell Selected (0)</button>
         <button id="selectAllBtn">Select All</button>
     </div>
-
 </div>
 
-<!-- FILTER BAR -->
 <div id="filterBar">
     <input type="text" id="searchBar" placeholder="Search by name...">
 
@@ -98,7 +86,6 @@
         <option value="exceedingly_rare">Exceedingly Rare</option>
     </select>
 
-
     <select id="sortOrder">
         <option value="newest">Sort By: Newest</option>
         <option value="oldest">Sort By: Oldest</option>
@@ -109,21 +96,19 @@
     </select>
 </div>
 <script type="module">
-  import { Money } from "./money.js";
-  import { Xp } from "./xp.js";
-  import { getLevel } from "./level.js";
+  import { Money } from "./js/money.js";
+  import { Xp } from "./js/xp.js";
+  import { getLevel } from "./js/level.js";
 
   const uid = localStorage.getItem("uid");
   if (!uid) window.location.href = "login.html";
 
-  /* --- Money --- */
   function refreshMoney(balance) {
     document.getElementById("moneyAmount").textContent = Money.format(balance);
   }
   Money.onChange(refreshMoney);
   Money.get(uid).then(refreshMoney);
 
-  /* --- Level Bar --- */
   function updateLevelBar(xp) {
     const { level, currentXp, xpToNextLevel } = getLevel(xp);
     const percent = (currentXp / xpToNextLevel) * 100;
@@ -141,7 +126,7 @@
   import { Xp } from "./xp.js";
   import { getLevel } from "./level.js";
 </script>
-<!-- INVENTORY GRID -->
+
 <div id="inventoryGrid"></div>
 
 <script>
@@ -149,9 +134,8 @@ function toggleSidebar() {
     document.getElementById("sidebar").classList.toggle("open");
 }
 </script>
-
-<script src="auth.js"></script>
-<script type="module" src="inventory.js"></script>
-
+<script src="js/auth.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module" src="js/inventory.js"></script>
 </body>
 </html>

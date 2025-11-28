@@ -1,0 +1,46 @@
+.page-content {
+    margin-left: 100px;
+    margin-right: 40px;
+    margin-top: 110px;
+    padding-bottom: 40px;
+    font-family: "Nunito", sans-serif;
+}
+.page-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #c7b2df;
+    margin-bottom: 10px;
+}
+.page-subtitle {
+    font-size: 16px;
+    color: #9aa3ad;
+    margin-bottom: 25px;
+}
+.patch-list {
+    max-width: 700px;
+}
+.patch-note {
+    background-color: #10001f;
+    margin-bottom: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    border-left: 4px solid #88719e;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.patch-note:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(136, 113, 158, 0.4);
+    border-color: #2ecc71;
+}
+.patch-note h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    color: #f1c40f;
+}
+.patch-note p {
+    margin: 0;
+    font-size: 14px;
+    color: #e6eef6;
+    line-height: 1.5;
+}

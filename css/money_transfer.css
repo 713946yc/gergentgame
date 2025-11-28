@@ -1,0 +1,87 @@
+.transfer-box {
+    margin-left: 120px;
+    margin-top: 100px;
+    background: #1b0d2e;
+    padding: 35px;
+    border-radius: 14px;
+    width: 420px;
+    box-shadow: 0 0 20px rgba(120, 60, 200, 0.5);
+}
+.transfer-title {
+    font-size: 27px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: #c8a4ff;
+}
+.balance-text {
+    font-size: 18px;
+    color: #8ae2ff;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+#remainingDeposit {
+    background: #251338;
+    padding: 12px 16px;
+    border-radius: 10px;
+    color: #e6d7ff;
+    font-size: 17px;
+    font-weight: 600;
+    border: 2px solid #6a3cff;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+    text-align: center;
+}
+.transfer-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.mode-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 17px;
+    border: none;
+    background: #30005e;
+    color: white;
+}
+.mode-btn.active { background: #6d35c7; }
+#amountInput {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #140a22;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+#confirmBtn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 18px;
+    cursor: pointer;
+    background: #6d35c7;
+    color: white;
+}
+.sidebar img,
+.sidebar-icon,
+.home-icon,
+.cases-icon,
+.inventory-icon,
+.trade-icon {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain !important;
+    filter: invert(62%) sepia(13%) saturate(722%)
+            hue-rotate(233deg) brightness(90%) contrast(86%) !important;
+    transform: translateY(-5%) !important;
+}
