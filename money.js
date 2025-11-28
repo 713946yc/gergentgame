@@ -1,17 +1,18 @@
 // money.js
 import { supabase } from "./supabaseClient.js";
 
-export const Money = (function() {
+export const Money = (function () {
     const listeners = new Set();
 
-    // Notify all registered listeners of balance changes
     function notify(balance) {
         listeners.forEach(fn => {
             try { fn(balance); } catch (e) {}
         });
     }
 
-    // Get current balance for a specific user
+    // -------------------------------
+    // GET BALANCE
+    // -------------------------------
     async function get(uid) {
         if (!uid) return 0;
 
@@ -27,22 +28,59 @@ export const Money = (function() {
         }
 
         const balance = data?.balance ?? 0;
+
+        // 🔥 Notify UI
         notify(balance);
+
         return balance;
     }
 
-    // Format a number as currency
-    function format(n) {
-        if (n === undefined || n === null) return "$0.00";
-        return "$" + Number(n).toFixed(2);
+    // -------------------------------
+    // SET BALANCE (UI + DB)
+    // -------------------------------
+    async function set(uid, newBalance) {
+        if (!uid) return;
+
+        const { error } = await supabase
+            .from("money")
+            .update({ balance: newBalance })
+            .eq("user_id", uid);
+
+        if (error) {
+            console.error("Money.set DB error:", error.message);
+            return;
+        }
+
+        // 🔥 Notify UI instantly
+        notify(newBalance);
     }
 
-    // Register a listener function that runs on balance changes
+    // -------------------------------
+    // ADD MONEY (UI + DB)
+    // -------------------------------
+    async function add(uid, amount) {
+        if (!uid || amount === 0) return;
+
+        const current = await get(uid);
+        const updated = current + amount;
+
+        await set(uid, updated);
+    }
+
+    // -------------------------------
+    // FORMAT
+    // -------------------------------
+    function format(n) {
+        return "$" + Number(n || 0).toFixed(2);
+    }
+
+    // -------------------------------
+    // LISTENER
+    // -------------------------------
     function onChange(fn) {
         listeners.add(fn);
         return () => listeners.delete(fn);
     }
 
-    return { get, format, onChange };
-
+    return { get, set, add, format, onChange };
 })();

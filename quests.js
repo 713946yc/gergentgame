@@ -298,7 +298,7 @@ async function grantMoney(amount) {
   if (!uid || amount <= 0) return;
 
   try {
-    // get current balance
+    // Read current balance
     const { data: rows, error: gErr } = await supabase
       .from("money")
       .select("balance")
@@ -313,7 +313,7 @@ async function grantMoney(amount) {
     const currentBalance = Number(rows.balance || 0);
     const newBalance = currentBalance + Number(amount);
 
-    // update balance
+    // Update database
     const { error: uErr } = await supabase
       .from("money")
       .update({ balance: newBalance })
@@ -321,13 +321,19 @@ async function grantMoney(amount) {
 
     if (uErr) {
       console.error("Failed to update balance:", uErr);
-    } else {
-      console.log(`Money granted: $${amount}. New balance: $${newBalance}`);
+      return;
     }
+
+    // ⭐ INSTANT UI UPDATE (same as XP system)
+    Money.set(uid, newBalance);
+
+    console.log(`Money granted: $${amount}. New balance: $${newBalance}`);
+
   } catch (err) {
     console.error("grantMoney() failed:", err);
   }
 }
+
 
 
 
