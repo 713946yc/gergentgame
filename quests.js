@@ -295,22 +295,22 @@ async function grantXp(amount) {
 }
 
 async function grantMoney(amount) {
-  if (amount <= 0 || !uid) return;
+  if (!uid || amount <= 0) return;
 
   try {
-    // Use the same RPC style as your deposit page
-    const { error } = await supabase.rpc("safe_deposit", {
-      p_uid: uid,
-      p_amount: amount,
-    });
+    // Increase balance in your money table
+    await Money.add(uid, amount);
 
-    if (error) {
-      console.error("Failed to grant money from quest:", error.message);
-    }
+    // Notify UI topbar to refresh
+    const newBalance = await Money.get(uid);
+    Money.triggerChange(newBalance);
+
+    console.log(`Quest granted $${amount}`);
   } catch (err) {
-    console.error("Failed to grant money from quest:", err);
+    console.error("Failed to grant quest money:", err);
   }
 }
+
 
 
 async function completeQuest(q) {
