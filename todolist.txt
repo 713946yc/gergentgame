@@ -1,3 +1,4 @@
+animated quest and level up bars
 more and more and more cases
 transaction history
 rewards

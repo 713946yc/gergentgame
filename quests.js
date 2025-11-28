@@ -298,16 +298,34 @@ async function grantMoney(amount) {
   if (!uid || amount <= 0) return;
 
   try {
-    // Increase balance in your money table
-    await Money.add(uid, amount);
+    // get current balance
+    const { data: rows, error: gErr } = await supabase
+      .from("money")
+      .select("balance")
+      .eq("user_id", uid)
+      .single();
 
-    // Notify UI topbar to refresh
-    const newBalance = await Money.get(uid);
-    Money.triggerChange(newBalance);
+    if (gErr) {
+      console.error("Failed to read balance:", gErr);
+      return;
+    }
 
-    console.log(`Quest granted $${amount}`);
+    const currentBalance = Number(rows.balance || 0);
+    const newBalance = currentBalance + Number(amount);
+
+    // update balance
+    const { error: uErr } = await supabase
+      .from("money")
+      .update({ balance: newBalance })
+      .eq("user_id", uid);
+
+    if (uErr) {
+      console.error("Failed to update balance:", uErr);
+    } else {
+      console.log(`Money granted: $${amount}. New balance: $${newBalance}`);
+    }
   } catch (err) {
-    console.error("Failed to grant quest money:", err);
+    console.error("grantMoney() failed:", err);
   }
 }
 
