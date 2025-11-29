@@ -1,36 +1,14 @@
 // inventory_api.js
-// Clean rewritten version.
-// Ensures every inventory item gets a proper created_at timestamp
-// so newest/oldest sorting works correctly.
+// All inventory <-> Supabase helpers
 
 import { supabase } from "./supabaseClient.js";
 
-
-export async function addInventoryItem(uid, item) {
-  const { error } = await supabase
-    .from("inventory")
-    .insert({
-      uid,
-      name: item.name,
-      image: item.image,
-      price: item.price,
-      float: item.float,
-      rarity: item.rarity,
-      wear: item.wear,
-      color: item.color,
-      created_at: new Date().toISOString()
-    });
-
-  if (error) {
-    console.error("Failed to add item to inventory:", error);
-    throw error;
-  }
-}
-
-// Add a new inventory item for a given uid.
-
-// Get all inventory items for a given uid.
+/**
+ * Fetch all inventory items for a given user.
+ */
 export async function getInventory(uid) {
+  if (!uid) return [];
+
   const { data, error } = await supabase
     .from("inventory")
     .select("*")
@@ -38,28 +16,41 @@ export async function getInventory(uid) {
     .order("created_at", { ascending: false });
 
   if (error) {
-    console.error("Error loading inventory:", error);
+    console.error("Error loading inventory:", error.message);
     return [];
   }
 
-  return data;
+  return data || [];
 }
 
+/**
+ * Add a new inventory item for a given user.
+ * `item` can include:
+ *  - name, image, price, float, rarity, wear, color, stattrak
+ *  - pattern (number 1–999)
+ *  - pattern_note (string)
+ */
+export async function addInventoryItem(uid, item) {
+  if (!uid) return;
 
-// Delete one item
-export async function deleteInventoryItem(uid, id) {
-    if (!uid || !id) throw new Error("deleteInventoryItem: uid and id are required");
+  const payload = {
+    uid,
+    name: item.name,
+    image: item.image,
+    price: item.price,
+    float: item.float,
+    rarity: item.rarity,
+    wear: item.wear,
+    color: item.color,
+    stattrak: item.stattrak ?? false,
+    pattern: item.pattern ?? null,
+    pattern_note: item.pattern_note ?? null,
+    created_at: new Date().toISOString(),
+  };
 
-    const { error } = await supabase
-        .from("inventory")
-        .delete()
-        .eq("uid", uid)
-        .eq("id", id);
+  const { error } = await supabase.from("inventory").insert(payload);
 
-    if (error) {
-        console.error("[inventory_api] Error deleting inventory item:", error);
-        throw error;
-    }
-
-    return true;
+  if (error) {
+    console.error("Error adding inventory item:", error.message);
+  }
 }

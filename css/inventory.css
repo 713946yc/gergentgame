@@ -262,82 +262,174 @@ body {
     font-size: 1rem;
 }
 
-/* INVENTORY GRID */
+/* ------------------------------- */
+/* CLEANER INVENTORY LAYOUT        */
+/* ------------------------------- */
+
 #inventoryGrid {
     margin-left: 120px;
     margin-top: 25px;
     width: calc(100% - 140px);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 22px;
 }
 
-/* INVENTORY ITEM CARD */
+/* Inventory Card */
 .inventory-item {
-    background:var(--panel);
-    border-radius:8px;
-    padding:10px;
-    text-align:center;
-    box-shadow:0 4px 10px rgba(0,0,0,0.3);
-    position:relative;
-    border:2px solid transparent;
-    transition:border 0.3s, transform 0.2s;
-    cursor:pointer;
+    background: #1a112b;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 2px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+}
+
+.inventory-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
 }
 
 .inventory-item.selected {
-    outline:3px solid #3498db;
-    transform: scale(1.03);
+    border-color: #f1c40f;
+    box-shadow: 0 0 12px rgba(241,196,15,0.6);
 }
 
-.inventory-item img {
-    width:180px;
-    height:120px;
-    object-fit:cover;
-    border-radius:4px;
-    margin-bottom:5px;
+.inv-image-wrapper {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #2a1b3d, #120b1f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* IMPORTANT — prevent overflow */
+    overflow: hidden; /* 🔥 ensures images NEVER escape */
 }
 
-.inventory-item .name {
-    font-weight:700;
-    font-size:1rem;
-    margin-bottom:2px;
+.inv-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
-.inventory-item .rarity-text {
-    font-size:0.8rem;
-    color:#999;
-    margin-bottom:4px;
+
+/* Info Section */
+.inv-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.inventory-item .details {
-    font-size:0.85rem;
-    color: var(--muted);
+/* NAME (bold) */
+.inv-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
 }
 
-.inventory-item .price {
-    font-weight:700;
-    color: var(--gold);
-    margin-top:5px;
-    display:block;
+/* RARITY PILL NOW UNDER NAME */
+.inv-rarity-pill {
+    margin-top: -4px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    width: fit-content;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.4px;
 }
 
-/* SELL BUTTON INSIDE CARD */
-.sell-btn {
-    background:#2ecc71;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    border-radius:4px;
-    cursor:pointer;
-    margin-top:8px;
-    font-size:0.85rem;
-    font-weight:600;
-    transition:background 0.2s;
+/* Rarity colors (same as your theme) */
+.rarity-mil_spec {
+    background: linear-gradient(to right, #234c8f, #4a90e2);
 }
-.sell-btn:hover {
-    background:#27ae60;
+.rarity-restricted {
+    background: linear-gradient(to right, #5a2a87, #9b59b6);
 }
+.rarity-classified {
+    background: linear-gradient(to right, #932863, #ff4daf);
+}
+.rarity-covert {
+    background: linear-gradient(to right, #8b1a11, #e9331f);
+}
+.rarity-exceedingly_rare {
+    background: linear-gradient(to right, #c59a09, #f1c40f);
+}
+
+/* Wear / Float Row */
+.inv-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+/* Pattern Row */
+.inv-pattern-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.pattern-tag-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+
+    /* FIX: Remove gold default and let JS control only the badge */
+    border: 1px solid currentColor;
+    background: transparent;
+
+    /* Prevent row-wide coloring bugs */
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* Bottom Row */
+.inv-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.inv-price {
+    font-size: 15px;
+    font-weight: 800;
+    color: #f1c40f;
+}
+
+/* SELL BUTTON */
+.inventory-item .sell-btn {
+    background: #c0392b;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.1s ease, transform 0.05s ease;
+}
+
+.inventory-item .sell-btn:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+}
+
+
 
 /* --- Trade-Up Modal Overlay --- */
 #tradeUpModal {

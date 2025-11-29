@@ -1,18 +1,20 @@
 // case_engine.js
-// Fully stable CSGORoll-style case engine with XP system
-// Features:
-// - 6.5s smooth spin animation
-// - Skip button fast-forward
-// - Random stop anywhere inside winner tile
-// - No spam clicks
-// - No second-spin freeze bug
-// - Inventory saving via Supabase
-// - XP/Level system
+// Case engine with:
+// - Smooth 6.5s animation
+// - Skip button
+// - Randomized end offset
+// - Spam-click lock
+// - Inventory saving
+// - XP / Quests
+// - Pattern system (FIXED)
+// - Sounds
+// - CS:GO-style inspect panel result UI (pattern formatting FIXED)
 
 import { addInventoryItem } from "./inventory_api.js";
 import { Xp } from "./xp.js";
 import { supabase } from "./supabaseClient.js";
 import { handleCaseOpened } from "./quests.js";
+import { rollPattern, evaluatePattern } from "./patterns.js";
 
 /* ---------------------------------------------------------
    NAME FORMATTING
@@ -22,18 +24,16 @@ function formatFormattedName(skin, isStatTrak) {
   let name = skin.name || "";
   const parts = [];
 
-  if (rarity === "exceedingly_rare") {
+  if (rarity === "exceedingly_rare")
     parts.push(`<span style="color:#f1c40f;">★</span>`);
-  }
 
   if (name.startsWith("Souvenir ")) {
     name = name.slice("Souvenir ".length);
     parts.push(`<span style="color:#f1c40f;">Souvenir</span>`);
   }
 
-  if (isStatTrak) {
+  if (isStatTrak)
     parts.push(`<span style="color:#ff9900;">StatTrak™</span>`);
-  }
 
   parts.push(`<span style="color:${skin.color || "#fff"}">${name}</span>`);
 
@@ -41,7 +41,7 @@ function formatFormattedName(skin, isStatTrak) {
 }
 
 /* ---------------------------------------------------------
-   FLOAT & WEAR ROLLS
+   WEAR SYSTEM
 --------------------------------------------------------- */
 const WEAR_TIERS = [
   { code: "FN", label: "Factory New", min: 0.0, max: 0.07 },
@@ -51,31 +51,32 @@ const WEAR_TIERS = [
   { code: "BS", label: "Battle-Scarred", min: 0.45, max: 1.0 },
 ];
 
-function parseRange(str) {
-  if (!str) return [0, 1];
-  const [a, b] = str.split("-").map(Number);
+function parseRange(r) {
+  if (!r) return [0, 1];
+  const [a, b] = r.split("-").map(Number);
   return [Math.min(a, b), Math.max(a, b)];
 }
 
 function rollWearFloat(skin) {
-  const [minF, maxF] = parseRange(skin.float_range);
-  const allowed = WEAR_TIERS.filter((t) => t.max > minF && t.min < maxF);
+  const [min, max] = parseRange(skin.float_range);
+
+  const allowed = WEAR_TIERS.filter(t => t.max > min && t.min < max);
   const tier = allowed[Math.floor(Math.random() * allowed.length)];
 
-  const low = Math.max(tier.min, minF);
-  const high = Math.min(tier.max, maxF);
+  const low = Math.max(tier.min, min);
+  const high = Math.min(tier.max, max);
 
-  const floatVal = low + Math.random() * (high - low);
+  const fv = low + Math.random() * (high - low);
 
   return {
     wearLabel: tier.label,
     wearCode: tier.code,
-    floatValue: floatVal.toFixed(9),
+    floatValue: fv.toFixed(9)
   };
 }
 
 /* ---------------------------------------------------------
-   XP CALCULATION
+   XP
 --------------------------------------------------------- */
 function computeXp(skin, caseCost) {
   let xp = caseCost * 0.1;
@@ -86,7 +87,23 @@ function computeXp(skin, caseCost) {
 }
 
 /* ---------------------------------------------------------
-   MAIN CASE ENGINE
+   SOUNDS
+--------------------------------------------------------- */
+const sounds = {
+  open: new Audio("sounds/case_open_whoosh.mp3"),
+  tick: new Audio("sounds/case_tick.mp3"),
+  land: new Audio("sounds/case_land.mp3"),
+  rare: new Audio("sounds/case_rare.mp3"),
+  stattrak: new Audio("sounds/case_stattrak.mp3"),
+};
+
+function safePlay(a) {
+  if (!a) return;
+  try { a.currentTime = 0; a.play().catch(()=>{}); } catch(e){}
+}
+
+/* ---------------------------------------------------------
+   MAIN ENGINE
 --------------------------------------------------------- */
 export function initCasePage(options) {
   const {
@@ -102,11 +119,6 @@ export function initCasePage(options) {
     onBalanceChange,
   } = options;
 
-  // Use skinsJsonKey as a "case name" for quests/achievements
-  // e.g. "kilowatt", "cs20", "fever", "dreamsandnightmares",
-  // "dreamhack_2014_cobblestone_souvenir", "snakebite", "recoil", "revolution", "glove"
-  const caseName = skinsJsonKey;
-
   const openBtn = document.getElementById(elements.openBtnId);
   const skipBtn = document.getElementById(elements.skipBtnId);
   const strip = document.getElementById(elements.stripId);
@@ -116,27 +128,25 @@ export function initCasePage(options) {
   let skinsData = null;
   let currentWinner = null;
   let isSpinning = false;
-  let actionLocked = false;
+  let locked = false;
   let skipped = false;
   let spinTimeout = null;
+  let tickInterval = null;
   let lastOffset = 0;
 
-  // Disable button until skins are loaded
   openBtn.disabled = true;
 
-  /* Load Skins */
+  /* LOAD SKINS */
   (async () => {
     const res = await fetch("skins.json");
-    const json = await res.json();
-    skinsData = json[skinsJsonKey];
-    openBtn.disabled = false; // enable button
+    const data = await res.json();
+    skinsData = data[skinsJsonKey];
+    openBtn.disabled = false;
   })();
 
-  /* ---------------- Random Skin Picking ---------------- */
+  /* PICK RARITY & SKIN */
   function pickRarity(includeGold = true) {
-    let pool = includeGold
-      ? rarities
-      : rarities.filter((r) => r.name !== goldRarityName);
+    const pool = includeGold ? rarities : rarities.filter(r => r.name !== goldRarityName);
     let total = pool.reduce((s, r) => s + r.weight, 0);
 
     let roll = Math.random() * total;
@@ -149,42 +159,33 @@ export function initCasePage(options) {
 
   function pickSkin(includeGold = true) {
     const rarity = pickRarity(includeGold);
-    const pool = skinsData[rarity.name];
-    const base = pool[Math.floor(Math.random() * pool.length)];
+    const list = skinsData[rarity.name];
+    const base = list[Math.floor(Math.random() * list.length)];
 
-    return {
-      ...base,
-      rarity: rarity.name,
-      color: rarity.color,
-    };
+    return { ...base, rarity: rarity.name, color: rarity.color };
   }
 
-  function buildStrip(winnerSkin) {
+  /* STRIP BUILD */
+  function buildStrip(winner) {
     strip.innerHTML = "";
 
-    let mysteryImg = "images/mystery.png";
-
-    if (skinsJsonKey === "kilowatt")
-      mysteryImg = "images/mystery_kukri.png";
-    else if (skinsJsonKey === "fever")
-      mysteryImg = "images/mystery_fever.png";
-    else if (skinsJsonKey === "cs20")
-      mysteryImg = "images/mystery_classic.webp";
+    let mystery = "images/mystery.png";
+    if (skinsJsonKey === "kilowatt") mystery = "images/mystery_kukri.png";
+    if (skinsJsonKey === "fever") mystery = "images/mystery_fever.png";
+    if (skinsJsonKey === "cs20") mystery = "images/mystery_classic.webp";
 
     for (let i = 0; i < stripLength; i++) {
       const tile = document.createElement("div");
       tile.className = "tile";
 
-      const isWinner = i === winnerIndex;
-      const skin = isWinner ? winnerSkin : pickSkin(false);
+      const isWin = i === winnerIndex;
+      const skin = isWin ? winner : pickSkin(false);
 
       tile.style.backgroundColor = skin.color;
-
-      if (isWinner && skin.rarity === goldRarityName) {
-        tile.style.backgroundImage = `url('${mysteryImg}')`;
-      } else {
-        tile.style.backgroundImage = `url(${skin.image})`;
-      }
+      tile.style.backgroundImage =
+        isWin && skin.rarity === goldRarityName
+          ? `url('${mystery}')`
+          : `url(${skin.image})`;
 
       strip.appendChild(tile);
     }
@@ -197,204 +198,256 @@ export function initCasePage(options) {
     return t.offsetWidth + parseFloat(cs.marginRight);
   }
 
-  /* ---------------- Spin Animation ---------------- */
+  /* SPIN SOUND */
+  function startTicks() {
+    stopTicks();
+    tickInterval = setInterval(() => {
+      if (!isSpinning) return;
+      safePlay(sounds.tick);
+    }, 80);
+  }
+
+  function stopTicks() {
+    if (tickInterval) {
+      clearInterval(tickInterval);
+      tickInterval = null;
+    }
+  }
+
+  /* ANIMATION */
   function animateStrip() {
     const step = getTileStep();
 
-    const safeMargin = 0.05 * step;
-    lastOffset =
-      Math.random() * (step - 2 * safeMargin) -
-      (step / 2 - safeMargin);
+    const safe = 0.05 * step;
+    lastOffset = Math.random() * (step - 2 * safe) - (step / 2 - safe);
 
-    const targetX =
+    const target =
       -winnerIndex * step +
       (wrap.offsetWidth / 2 - step / 2) +
       lastOffset;
 
-    strip.style.transition =
-      "transform 6500ms cubic-bezier(0.0, 0.52, 0.22, 1)";
-    strip.style.transform = `translateX(${targetX}px)`;
+    strip.classList.add("strip-rolling");
+    isSpinning = true;
+    startTicks();
 
-    spinTimeout = setTimeout(
-      () => finalizeSpin().catch(console.error),
-      6550
-    );
+    strip.style.transition = "transform 6500ms cubic-bezier(0.0,0.52,0.22,1)";
+    strip.style.transform = `translateX(${target}px)`;
+
+    spinTimeout = setTimeout(() => finalizeSpin().catch(console.error), 6550);
   }
 
-  /* ---------------- Finalize Spin ---------------- */
-  function computePrice(skin, wearCode, stattrak) {
-    if (skin.name.includes("Vanilla")) {
-      const base = Number(skin.fixed_price || 0);
-      return Number(base.toFixed(2));
-    }
+  /* PRICE */
+  function computePrice(skin, wearCode, st) {
+    if (skin.name.includes("Vanilla"))
+      return Number((skin.fixed_price || 0).toFixed(2));
+
     const base = Number(skin.price?.[wearCode] || 0);
-    return Number(
-      (stattrak ? base * 1.5 : base).toFixed(2)
-    );
+    return Number((st ? base * 1.5 : base).toFixed(2));
   }
 
+  /* FINALIZE */
   async function finalizeSpin() {
     isSpinning = false;
-    actionLocked = false;
+    locked = false;
     skipped = false;
+
+    stopTicks();
+    strip.classList.remove("strip-rolling");
 
     skipBtn.style.display = "none";
     openBtn.style.display = "inline-block";
 
+    /* WEAR */
     let wearLabel = "No Wear";
     let wearCode = "NONE";
     let floatValue = "0.000000000";
     let isST = false;
 
-    if (!currentWinner.name.includes("Vanilla")) {
-      const roll = rollWearFloat(currentWinner);
-      wearLabel = roll.wearLabel;
-      wearCode = roll.wearCode;
-      floatValue = roll.floatValue;
+    const isVanilla = currentWinner.name.toLowerCase().includes("vanilla");
 
-      isST =
-        currentWinner.stattrak_available &&
-        Math.random() < 0.1;
+    if (!isVanilla) {
+      const w = rollWearFloat(currentWinner);
+      wearLabel = w.wearLabel;
+      wearCode = w.wearCode;
+      floatValue = w.floatValue;
+
+      isST = currentWinner.stattrak_available && Math.random() < 0.1;
+      if (isST) safePlay(sounds.stattrak);
     }
 
-    const price = computePrice(
-      currentWinner,
-      wearCode,
-      isST
-    );
-    const nameHTML = formatFormattedName(
-      currentWinner,
-      isST
-    );
+    /* ----- PATTERN SYSTEM (no patterns for Vanilla) ----- */
+    let pattern = null;
+    let patternTag = null;
+    let patternColor = null;
+    let patternMultiplier = 1;
 
-    if (currentWinner.name.includes("Vanilla")) {
-      resultEl.innerHTML = `
-                <div class="title">${nameHTML}</div>
-                <div>Value: <b>${Money.format(
-                  price
-                )}</b></div>
-                <img src="${
-                  currentWinner.image
-                }"
-                    style="border:3px solid ${
-                      currentWinner.color
-                    };
-                           border-radius:6px; margin-top:10px;">
-            `;
-    } else {
-      resultEl.innerHTML = `
-                <div class="title">${nameHTML}</div>
-                <div>Wear: <b>${wearLabel}</b> | Float: <b>${floatValue}</b> | Value: <b>${Money.format(
-        price
-      )}</b></div>
-                <img src="${
-                  currentWinner.image
-                }"
-                    style="border:3px solid ${
-                      currentWinner.color
-                    };
-                           border-radius:6px; margin-top:10px;">
-            `;
+    if (!isVanilla) {
+      pattern = rollPattern();
+
+      const patternData = evaluatePattern(currentWinner.name, pattern);
+
+      patternTag = patternData.tag;
+      patternColor = patternData.color || "#ffd700";
+      patternMultiplier = patternData.multiplier || 1;  // ✔ ALWAYS correct
     }
+
+
+    /* PRICE */
+    const basePrice = computePrice(currentWinner, wearCode, isST);
+    const finalPrice = Number((basePrice * patternMultiplier).toFixed(2));
+
+    /* SOUND */
+    const isGold = currentWinner.rarity === "exceedingly_rare";
+    const isSpecialPattern = !!patternTag;
+
+    safePlay(isGold || isSpecialPattern ? sounds.rare : sounds.land);
+
+    /* NAME + RARITY */
+    const nameHTML = formatFormattedName(currentWinner, isST);
+
+    const rarityText = currentWinner.rarity
+      .replace("mil_spec", "Mil-Spec")
+      .replace("restricted", "Restricted")
+      .replace("classified", "Classified")
+      .replace("covert", "Covert")
+      .replace("exceedingly_rare", "Exceedingly Rare");
+
+    const rClass = `rarity-pill rarity-${currentWinner.rarity}`;
+
+    /* INSPECT PANEL — FIXED PATTERN FORMAT */
+    let patternLines = "";
+
+    if (!isVanilla && pattern) {
+      if (patternTag) {
+      patternLines = `
+        <div class="inspect-stat-line">
+          <span class="label">Pattern Index</span>
+          <span class="pattern-val">
+            <span class="pattern-tag" style="color:${patternColor};">
+              ${patternTag}
+            </span>
+            <span class="pattern-bullet">•</span>
+            <span class="pattern-number">#${pattern}</span>
+          </span>
+        </div>
+      `;
+
+      } else {
+        patternLines = `
+          <div class="inspect-stat-line">
+            <span class="label">Pattern Index</span>
+            <span>#${pattern}</span>
+          </div>
+        `;
+      }
+    }
+
+    const exteriorLine = !isVanilla
+      ? `<div class="inspect-stat-line"><span class="label">Exterior</span><span>${wearLabel}</span></div>`
+      : "";
+
+    const floatLine = !isVanilla
+      ? `<div class="inspect-stat-line"><span class="label">Float Value</span><span>${floatValue}</span></div>`
+      : "";
+
+    const valueLine = `
+      <div class="inspect-stat-line">
+        <span class="label">Estimated Value</span>
+        <span class="inspect-price">${Money.format(finalPrice)}</span>
+      </div>
+    `;
+
+    /* RENDER RESULT */
+    resultEl.innerHTML = `
+      <div class="inspect-card">
+        <div class="inspect-header">
+          <div class="inspect-title">${nameHTML}</div>
+          <div class="${rClass}">${rarityText}</div>
+        </div>
+
+        <div class="inspect-body">
+          <div class="inspect-image-wrapper rarity-frame-${currentWinner.rarity}">
+            <img src="${currentWinner.image}">
+          </div>
+
+          <div class="inspect-stats">
+            ${exteriorLine}
+            ${floatLine}
+            ${patternLines}
+            ${valueLine}
+          </div>
+        </div>
+      </div>
+    `;
 
     resultEl.style.opacity = 1;
 
-    // Add to inventory
+    /* SAVE INVENTORY ITEM */
     addInventoryItem(uid, {
       name: currentWinner.name,
       image: currentWinner.image,
       wear: wearLabel,
       float: floatValue,
-      price,
+      price: finalPrice,
       color: currentWinner.color,
       stattrak: isST,
       rarity: currentWinner.rarity,
+      pattern,
+      pattern_note: patternTag || null,
+      pattern_color: patternColor
     });
 
-    // Add XP
+    /* XP */
     try {
-      const xpGained = computeXp(currentWinner, caseCost);
-      await Xp.add(uid, xpGained);
-      console.log(`User ${uid} gained ${xpGained} XP!`);
-    } catch (err) {
-      console.error("XP addition failed:", err);
-    }
+      const gained = computeXp(currentWinner, caseCost);
+      await Xp.add(uid, gained);
+    } catch (e) {}
 
+    /* QUESTS */
     try {
-      // Detect if this drop is some kind of gloves / hand wraps
-      const name = (currentWinner.name || "").toLowerCase();
-      const isGloves =
-        name.includes("gloves") || name.includes("hand wraps");
-
-      console.log("QUEST HOOK FIRED", {
-        caseName,
-        casePrice: Number(caseCost),
-        itemRarity: currentWinner.rarity,
-        itemValue: price,
-        isGloves,
-      });
-
+      const isGloves = currentWinner.name.toLowerCase().includes("gloves");
       await handleCaseOpened({
-        caseId: caseName,        // add this line
-        caseName: caseName,
+        caseId: skinsJsonKey,
+        caseName: skinsJsonKey,
         casePrice: Number(caseCost),
         itemRarity: currentWinner.rarity,
-        itemValue: price,
+        itemValue: finalPrice,
         isGloves,
       });
-
-    } catch (err) {
-      console.error("Quest tracking failed:", err);
-    }
-
-
-
+    } catch (e) {}
   }
 
-  /* ---------------------------------------------------------
-     BUTTON HANDLERS
-  --------------------------------------------------------- */
+  /* BUTTON HANDLERS */
   openBtn.addEventListener("click", async () => {
-    if (isSpinning || actionLocked || !skinsData) return;
-
-    actionLocked = true;
+    if (isSpinning || locked || !skinsData) return;
+    locked = true;
 
     try {
       const balance = await Money.get(uid);
       if (balance < caseCost) {
-        actionLocked = false;
+        locked = false;
         return alert("Not enough funds!");
       }
 
-      const { error } = await supabase.rpc(
-        "safe_withdraw",
-        {
-          p_uid: uid,
-          p_amount: caseCost,
-        }
-      );
+      const { error } = await supabase.rpc("safe_withdraw", {
+        p_uid: uid,
+        p_amount: caseCost,
+      });
 
       if (error) {
-        console.error(
-          "Withdrawal failed:",
-          error.message
-        );
-        alert(
-          "Unable to open case — insufficient funds."
-        );
-        actionLocked = false;
-        return;
+        locked = false;
+        return alert("Unable to open case.");
       }
 
-      // ✅ Update UI balance correctly
       if (onBalanceChange) {
-        const newBalance = await Money.get(uid);
-        onBalanceChange(newBalance);
+        const newB = await Money.get(uid);
+        onBalanceChange(newB);
       }
+
+      safePlay(sounds.open);
 
       currentWinner = pickSkin(true);
 
-      // Reset spin
       strip.style.transition = "none";
       strip.style.transform = "translateX(0px)";
       void strip.offsetWidth;
@@ -411,9 +464,8 @@ export function initCasePage(options) {
 
       isSpinning = true;
       animateStrip();
-    } catch (err) {
-      console.error("Error opening case:", err);
-      actionLocked = false;
+    } catch (e) {
+      locked = false;
     }
   });
 
@@ -424,29 +476,21 @@ export function initCasePage(options) {
     clearTimeout(spinTimeout);
 
     const step = getTileStep();
-    const targetX =
+    const target =
       -winnerIndex * step +
       (wrap.offsetWidth / 2 - step / 2) +
       lastOffset;
 
-    const computed =
-      window.getComputedStyle(strip).transform;
-    let currentX = 0;
-    if (computed !== "none") {
-      const matrix = new DOMMatrixReadOnly(computed);
-      currentX = matrix.m41;
-    }
+    const matrix = new DOMMatrixReadOnly(window.getComputedStyle(strip).transform);
+    const currentX = matrix.m41;
 
     strip.style.transition = "none";
     strip.style.transform = `translateX(${currentX}px)`;
     void strip.offsetWidth;
 
     strip.style.transition = "transform 300ms linear";
-    strip.style.transform = `translateX(${targetX}px)`;
+    strip.style.transform = `translateX(${target}px)`;
 
-    setTimeout(
-      () => finalizeSpin().catch(console.error),
-      320
-    );
+    setTimeout(() => finalizeSpin().catch(console.error), 320);
   });
 }

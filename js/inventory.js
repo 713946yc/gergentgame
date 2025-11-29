@@ -4,15 +4,12 @@ import { getInventory } from "./inventory_api.js";
 import { supabase } from "./supabaseClient.js";
 import { handleSellItems, initQuestsUI } from "./quests.js";
 
-
-
 // --- UID check ---
 const uid = localStorage.getItem("uid");
 if (!uid) window.location.href = "login.html";
 
-// ✅ Make sure quests/achievements know who this user is
+// Quests / achievements awareness
 await initQuestsUI(uid);
-
 
 // --- DOM Elements ---
 const gridEl = document.getElementById("inventoryGrid");
@@ -55,17 +52,25 @@ function formatRarityLabel(rarity) {
     .replace("exceedingly_rare", "Exceedingly Rare");
 }
 
+function rarityClassName(rarity) {
+  return `rarity-${(rarity || "").toLowerCase()}`;
+}
+
 function formatSkinName(item) {
   const rarity = (item.rarity || "").toLowerCase();
   let name = item.name || "";
   const parts = [];
 
-  if (rarity === "exceedingly_rare") parts.push(`<span style="color:#f1c40f;">★</span>`);
+  if (rarity === "exceedingly_rare") {
+    parts.push(`<span style="color:#f1c40f;">★</span>`);
+  }
   if (name.startsWith("Souvenir ")) {
     name = name.slice("Souvenir ".length);
     parts.push(`<span style="color:#f1c40f;">Souvenir</span>`);
   }
-  if (item.stattrak) parts.push(`<span style="color:#ff9900;">StatTrak™</span>`);
+  if (item.stattrak) {
+    parts.push(`<span style="color:#ff9900;">StatTrak™</span>`);
+  }
 
   parts.push(`<span style="color:${item.color || "#ffffff"}">${name}</span>`);
   return parts.join(" ");
@@ -82,11 +87,17 @@ function filterAndSortItems() {
 
   let items = allItems.slice();
 
-  if (search)
-    items = items.filter(item => (item.name || "").toLowerCase().includes(search));
+  if (search) {
+    items = items.filter((item) =>
+      (item.name || "").toLowerCase().includes(search)
+    );
+  }
 
-  if (rarityFilter)
-    items = items.filter(item => (item.rarity || "").toLowerCase() === rarityFilter);
+  if (rarityFilter) {
+    items = items.filter(
+      (item) => (item.rarity || "").toLowerCase() === rarityFilter
+    );
+  }
 
   items.sort((a, b) => {
     const da = new Date(a.created_at || 0);
@@ -123,10 +134,11 @@ function updateSellSelectedButton() {
 }
 
 function updateSelectAllLabel() {
-  if (selectedIds.size === allItems.length && allItems.length > 0)
+  if (selectedIds.size === allItems.length && allItems.length > 0) {
     selectAllBtn.textContent = "Clear Selection";
-  else
+  } else {
     selectAllBtn.textContent = "Select All";
+  }
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -142,39 +154,79 @@ function renderInventory() {
     return;
   }
 
-  items.forEach(item => {
+  items.forEach((item) => {
     const price = Number(item.price || 0);
 
     const card = document.createElement("div");
     card.className = "inventory-item";
     if (selectedIds.has(item.id)) card.classList.add("selected");
 
-    // ✅ restore rarity outline
-    card.style.border = `2px solid ${item.color || "transparent"}`;
+    const rarityClass = rarityClassName(item.rarity);
+    const hasWearInfo = !item.name.includes("Vanilla");
+
+    const patternNumber = item.pattern ?? null;
+    const patternNote = item.pattern_note || "";
+    const patternColor = item.pattern_color || "#ffd700";
+
+    // Pretty exterior
+    const exterior = hasWearInfo ? item.wear : "";
+
+    // Build detail lines
+    const floatText = hasWearInfo
+      ? (item.float ?? 0).toFixed(9)
+      : null;
 
     card.innerHTML = `
-      <img src="${item.image}" alt="${item.name}">
-      <div class="name">${formatSkinName(item)}</div>
-      <div class="rarity-text">${formatRarityLabel(item.rarity)}</div>
-
-      <div class="details">
-        ${
-          item.name.includes("Vanilla")
-            ? ""
-            : `Wear: ${item.wear} | Float: ${(item.float ?? 0).toFixed(9)}`
-        }
+      <div class="inv-image-wrapper ${rarityClass}">
+        <img src="${item.image}" alt="${item.name}">
       </div>
 
-      <span class="price">${Money.format(price)}</span>
-      <button class="sell-btn">Sell</button>
+      <div class="inv-content">
+
+        <div class="inv-name">${formatSkinName(item)}</div>
+
+        <div class="inv-rarity-pill ${rarityClass}">
+          ${formatRarityLabel(item.rarity)}
+        </div>
+
+        <div class="inv-meta-row">
+          ${exterior ? `<span>Exterior: ${exterior}</span>` : ""}
+          ${floatText ? `<span>Float: ${floatText}</span>` : ""}
+        </div>
+
+        ${
+          patternNumber
+            ? `
+            <div class="inv-pattern-row">
+                <span>Pattern: #${patternNumber}</span>
+                ${
+                  patternNote
+                    ? `<span class="pattern-tag-badge" style="color:${patternColor}">
+                        ${patternNote}
+                      </span>`
+                    : ""
+                }
+            </div>`
+            : ""
+        }
+
+        <div class="inv-bottom-row">
+          <span class="inv-price">${Money.format(price)}</span>
+          <button class="sell-btn">Sell</button>
+        </div>
+
+      </div>
     `;
+
 
     // click = select
     card.addEventListener("click", (e) => {
       if (e.target.classList.contains("sell-btn")) return;
-      selectedIds.has(item.id)
-        ? selectedIds.delete(item.id)
-        : selectedIds.add(item.id);
+      if (selectedIds.has(item.id)) {
+        selectedIds.delete(item.id);
+      } else {
+        selectedIds.add(item.id);
+      }
 
       renderInventory();
       updateSellSelectedButton();
@@ -185,8 +237,8 @@ function renderInventory() {
     sellBtn.addEventListener("click", async (e) => {
       e.stopPropagation();
       if (isSelling) return;
-      sellBtn.textContent = "Selling...";
 
+      sellBtn.textContent = "Selling...";
       isSelling = true;
       disableAllSellButtons();
       await sellItems([item]);
@@ -203,31 +255,35 @@ function renderInventory() {
 // ------------------------------------------------------------------------------------------------
 
 function disableAllSellButtons() {
-  document.querySelectorAll(".sell-btn").forEach(btn => btn.disabled = true);
+  document.querySelectorAll(".sell-btn").forEach((btn) => {
+    btn.disabled = true;
+  });
   sellAllBtn.disabled = true;
   sellSelectedBtn.disabled = true;
 }
 
 function enableAllSellButtons() {
-  document.querySelectorAll(".sell-btn").forEach(btn => btn.disabled = false);
+  document.querySelectorAll(".sell-btn").forEach((btn) => {
+    btn.disabled = false;
+  });
   sellAllBtn.disabled = false;
   sellSelectedBtn.disabled = false;
 }
 
 // ------------------------------------------------------------------------------------------------
-// SAFE SELL — Duplicaton-Proof
+// SAFE SELL — Duplication-proof + achievement hook
 // ------------------------------------------------------------------------------------------------
 
 async function sellItems(items) {
   if (!items.length) return;
 
-  const countSold = items.length;  // ⭐ capture count BEFORE RPC loop
+  const countSold = items.length; // capture BEFORE loop
 
   try {
     for (const item of items) {
       const { error } = await supabase.rpc("safe_sell", {
         p_uid: uid,
-        p_item_id: item.id
+        p_item_id: item.id,
       });
 
       if (error) {
@@ -240,10 +296,10 @@ async function sellItems(items) {
     console.error("Sell RPC failed:", err);
   }
 
-  // ✅ Achievement: sell 100+ items in a single bulk-sell
+  // Achievement: sell 100+ items in one go
   await handleSellItems(countSold);
 
-  // ✅ update money FIRST
+  // refresh money
   refreshTopBarMoney(await Money.get(uid));
 
   selectedIds.clear();
@@ -251,14 +307,11 @@ async function sellItems(items) {
 
   enableAllSellButtons();
   isSelling = false;
+
   // Restore button text
   sellAllBtn.textContent = "Sell All";
   updateSellSelectedButton();
-
 }
-
-
-
 
 // ------------------------------------------------------------------------------------------------
 // LOAD INVENTORY
@@ -267,7 +320,10 @@ async function sellItems(items) {
 async function loadInventory() {
   allItems = await getInventory(uid);
 
-  const totalValue = allItems.reduce((s, it) => s + Number(it.price || 0), 0);
+  const totalValue = allItems.reduce(
+    (s, it) => s + Number(it.price || 0),
+    0
+  );
   totalValueEl.textContent = Money.format(totalValue);
 
   renderInventory();
@@ -283,7 +339,7 @@ sortOrderEl.addEventListener("change", renderInventory);
 
 sellAllBtn.addEventListener("click", () => {
   if (!allItems.length || isSelling) return;
-  
+
   isSelling = true;
 
   // UI Feedback
@@ -297,7 +353,7 @@ sellAllBtn.addEventListener("click", () => {
 sellSelectedBtn.addEventListener("click", () => {
   if (isSelling) return;
 
-  const selected = allItems.filter(i => selectedIds.has(i.id));
+  const selected = allItems.filter((i) => selectedIds.has(i.id));
   if (!selected.length) return;
 
   isSelling = true;
@@ -309,15 +365,16 @@ sellSelectedBtn.addEventListener("click", () => {
   sellItems(selected);
 });
 
-
 selectAllBtn.addEventListener("click", () => {
-  selectedIds.size === allItems.length
-    ? selectedIds.clear()
-    : selectedIds = new Set(allItems.map(i => i.id));
+  if (selectedIds.size === allItems.length) {
+    selectedIds.clear();
+  } else {
+    selectedIds = new Set(allItems.map((i) => i.id));
+  }
 
   renderInventory();
   updateSellSelectedButton();
 });
 
-// ✅ INIT
+// INIT
 loadInventory();

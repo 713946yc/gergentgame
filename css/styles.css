@@ -240,3 +240,23 @@ body {
     transform: translateY(-5%);
     width: 24px;
 }
+.pattern-note {
+    color: #f1c40f;
+    font-weight: bold;
+    margin-top: 4px;
+    text-shadow: 0 0 6px #f1c40f;
+}
+
+.inventory-item div {
+  margin-bottom: 2px;
+}
+
+.pattern-special {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.inventory-item .price {
+  margin-top: 6px;
+  display: block;
+}

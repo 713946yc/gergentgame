@@ -17,6 +17,8 @@ const ALL_CASE_IDS = [
   "recoil",
   "revolution",
   "glove",
+  "gamma",
+  "gamma2"
 ];
 
 export const QUESTS = [

@@ -745,5 +745,375 @@
       { "name": "Classic Knife | Slaughter", "image": "images/classicknife_slaughter.webp", "float_range": "0.01-0.26", "price": { "FN": "204.88", "MW": "185.99", "FT": "184.28", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
       { "name": "Classic Knife | Safari Mesh", "image": "images/classicknife_safarimesh.webp", "float_range": "0.06-0.80", "price": { "FN": "174.16", "MW": "75.32", "FT": "74.34", "WW": "70.56", "BS": "69.39" }, "stattrak_available": true }
     ]
+  },
+  "gamma": {
+    "mil_spec": [
+      {
+        "name": "Nova | Exo",
+        "image": "images/nova_exo.webp",
+        "float_range": "0.00-0.50",
+        "price": { "FN": "0.41", "MW": "0.26", "FT": "0.25", "WW": "0.24", "BS": "0.22" },
+        "stattrak_available": true
+      },
+      {
+        "name": "PP-Bizon | Harvester",
+        "image": "images/ppbizon_harvester.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "1.89", "MW": "0.28", "FT": "0.23", "WW": "0.21", "BS": "0.21" },
+        "stattrak_available": true
+      },
+      {
+        "name": "P250 | Iron Clad",
+        "image": "images/p250_ironclad.webp",
+        "float_range": "0.00-0.80",
+        "price": { "FN": "2.24", "MW": "0.29", "FT": "0.24", "WW": "0.22", "BS": "0.21" },
+        "stattrak_available": true
+      },
+      {
+        "name": "MAC-10 | Carnivore",
+        "image": "images/mac10_carnivore.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "1.24", "MW": "0.30", "FT": "0.25", "WW": "0.21", "BS": "0.21" },
+        "stattrak_available": true
+      },
+      {
+        "name": "SG 553 | Aerial",
+        "image": "images/sg553_aerial.webp",
+        "float_range": "0.00-0.60",
+        "price": { "FN": "0.42", "MW": "0.25", "FT": "0.25", "WW": "0.24", "BS": "0.23" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Tec-9 | Ice Cap",
+        "image": "images/tec9_icecap.webp",
+        "float_range": "0.00-0.50",
+        "price": { "FN": "0.71", "MW": "0.36", "FT": "0.25", "WW": "0.24", "BS": "0.22" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Five-SeveN | Violent Daimyo",
+        "image": "images/fiveseven_violentdaimyo.webp",
+        "float_range": "0.00-0.70",
+        "price": { "FN": "1.12", "MW": "0.54", "FT": "0.36", "WW": "0.35", "BS": "0.26" },
+        "stattrak_available": true
+      }
+    ],
+
+    "restricted": [
+      {
+        "name": "Sawed-Off | Limelight",
+        "image": "images/sawedoff_limelight.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "6.18", "MW": "2.68", "FT": "1.12", "WW": "1.07", "BS": "0.96" },
+        "stattrak_available": true
+      },
+      {
+        "name": "P90 | Chopper",
+        "image": "images/p90_chopper.webp",
+        "float_range": "0.00-0.60",
+        "price": { "FN": "4.08", "MW": "1.64", "FT": "1.22", "WW": "1.17", "BS": "0.98" },
+        "stattrak_available": true
+      },
+      {
+        "name": "AUG | Aristocrat",
+        "image": "images/aug_aristocrat.webp",
+        "float_range": "0.00-0.66",
+        "price": { "FN": "4.03", "MW": "1.71", "FT": "1.23", "WW": "1.12", "BS": "1.12" },
+        "stattrak_available": true
+      },
+      {
+        "name": "R8 Revolver | Reboot",
+        "image": "images/r8revolver_reboot.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "7.50", "MW": "2.79", "FT": "1.28", "WW": "1.09", "BS": "0.95" },
+        "stattrak_available": true
+      },
+      {
+        "name": "AWP | Phobos",
+        "image": "images/awp_phobos.webp",
+        "float_range": "0.00-0.40",
+        "price": { "FN": "3.76", "MW": "2.96", "FT": "2.00", "WW": "1.65", "BS": "0.00" },
+        "stattrak_available": true
+      }
+    ],
+
+    "classified": [
+      {
+        "name": "SCAR-20 | Bloodsport",
+        "image": "images/scar20_bloodsport.webp",
+        "float_range": "0.00-0.45",
+        "price": { "FN": "29.42", "MW": "13.40", "FT": "10.60", "WW": "10.52", "BS": "0.00" },
+        "stattrak_available": true
+      },
+      {
+        "name": "P2000 | Imperial Dragon",
+        "image": "images/p2000_imperialdragon.webp",
+        "float_range": "0.00-0.63",
+        "price": { "FN": "32.35", "MW": "14.04", "FT": "10.43", "WW": "10.02", "BS": "10.00" },
+        "stattrak_available": true
+      },
+      {
+        "name": "M4A4 | Desolate Space",
+        "image": "images/m4a4_desolatespace.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "133.56", "MW": "29.27", "FT": "14.14", "WW": "11.56", "BS": "10.92" },
+        "stattrak_available": true
+      }
+    ],
+
+    "covert": [
+      {
+        "name": "Glock-18 | Wasteland Rebel",
+        "image": "images/glock18_wastelandrebel.webp",
+        "float_range": "0.00-0.54",
+        "price": { "FN": "189.34", "MW": "113.27", "FT": "101.42", "WW": "93.72", "BS": "89.54" },
+        "stattrak_available": true
+      },
+      {
+        "name": "M4A1-S | Mecha Industries",
+        "image": "images/m4a1s_mechaindustries.webp",
+        "float_range": "0.00-0.80",
+        "price": { "FN": "425.10", "MW": "232.05", "FT": "123.42", "WW": "99.31", "BS": "85.10" },
+        "stattrak_available": true
+      }
+    ],
+
+    "exceedingly_rare": [
+      { "name": "Bayonet | Gamma Doppler Emerald", "image": "images/bayonet_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "3600.00", "MW": "2399.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 1", "image": "images/bayonet_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "634.67", "MW": "548.86", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 2", "image": "images/bayonet_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "947.28", "MW": "718.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 3", "image": "images/bayonet_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "620.41", "MW": "549.56", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 4", "image": "images/bayonet_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "799.24", "MW": "634.80", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Emerald", "image": "images/flipknife_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "1700.00", "MW": "1508.26", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 1", "image": "images/flipknife_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "495.81", "MW": "495.70", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 2", "image": "images/flipknife_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "671.99", "MW": "611.57", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 3", "image": "images/flipknife_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "544.04", "MW": "455.85", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 4", "image": "images/flipknife_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "538.81", "MW": "511.16", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Emerald", "image": "images/gutknife_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "699.00", "MW": "477.71", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 1", "image": "images/gutknife_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "331.43", "MW": "223.67", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 2", "image": "images/gutknife_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "313.84", "MW": "231.35", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 3", "image": "images/gutknife_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "260.59", "MW": "163.97", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 4", "image": "images/gutknife_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "268.98", "MW": "165.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Emerald", "image": "images/karambit_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "11500.00", "MW": "10500.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 1", "image": "images/karambit_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "2717.62", "MW": "2602.79", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 2", "image": "images/karambit_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "3947.66", "MW": "3407.75", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 3", "image": "images/karambit_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "2676.00", "MW": "2237.98", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 4", "image": "images/karambit_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "2699.67", "MW": "2494.85", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Emerald", "image": "images/m9bayonet_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "10112.54", "MW": "9268.71", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 1", "image": "images/m9bayonet_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "1640.47", "MW": "1639.77", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 2", "image": "images/m9bayonet_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "2361.50", "MW": "2017.15", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 3", "image": "images/m9bayonet_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "1683.28", "MW": "1640.54", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 4", "image": "images/m9bayonet_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "1681.09", "MW": "1600.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Autotronic", "image": "images/karambit_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "1996.07", "MW": "1192.94", "FT": "940.93", "WW": "826.00", "BS": "697.90" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Bright Water", "image": "images/m9bayonet_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "425.00", "MW": "372.49", "FT": "336.00", "WW": "335.17", "BS": "334.92" }, "stattrak_available": true },
+      { "name": "Bayonet | Lore", "image": "images/bayonet_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "464.08", "MW": "316.46", "FT": "242.00", "WW": "239.62", "BS": "223.02" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Lore", "image": "images/m9bayonet_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "1500.00", "MW": "979.81", "FT": "494.23", "WW": "452.43", "BS": "391.55" }, "stattrak_available": true },
+      { "name": "Gut Knife | Bright Water", "image": "images/gutknife_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "73.89", "MW": "73.05", "FT": "65.73", "WW": "62.77", "BS": "59.32" }, "stattrak_available": true },
+      { "name": "Flip Knife | Bright Water", "image": "images/flipknife_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "136.95", "MW": "124.77", "FT": "120.54", "WW": "120.19", "BS": "110.91" }, "stattrak_available": true },
+      { "name": "Gut Knife | Black Laminate", "image": "images/gutknife_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "102.00", "MW": "67.06", "FT": "60.73", "WW": "58.29", "BS": "56.84" }, "stattrak_available": true },
+      { "name": "Gut Knife | Freehand", "image": "images/gutknife_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "91.30", "MW": "79.88", "FT": "65.74", "WW": "62.58", "BS": "64.90" }, "stattrak_available": true },
+      { "name": "Flip Knife | Black Laminate", "image": "images/flipknife_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "193.32", "MW": "125.29", "FT": "118.00", "WW": "113.42", "BS": "111.85" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Freehand", "image": "images/m9bayonet_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "435.00", "MW": "384.08", "FT": "364.41", "WW": "359.42", "BS": "355.99" }, "stattrak_available": true },
+      { "name": "Gut Knife | Autotronic", "image": "images/gutknife_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "189.98", "MW": "114.34", "FT": "96.04", "WW": "94.00", "BS": "92.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Freehand", "image": "images/flipknife_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "138.47", "MW": "129.02", "FT": "119.67", "WW": "118.81", "BS": "115.51" }, "stattrak_available": true },
+      { "name": "Flip Knife | Autotronic", "image": "images/flipknife_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "337.34", "MW": "210.00", "FT": "168.10", "WW": "166.10", "BS": "155.37" }, "stattrak_available": true },
+      { "name": "Karambit | Lore", "image": "images/karambit_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "1400.45", "MW": "850.00", "FT": "564.00", "WW": "527.51", "BS": "499.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Black Laminate", "image": "images/m9bayonet_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "725.00", "MW": "550.60", "FT": "510.61", "WW": "487.28", "BS": "481.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Black Laminate", "image": "images/bayonet_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "344.08", "MW": "178.00", "FT": "163.10", "WW": "161.13", "BS": "157.51" }, "stattrak_available": true },
+      { "name": "Gut Knife | Lore", "image": "images/gutknife_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "145.00", "MW": "108.47", "FT": "105.00", "WW": "90.01", "BS": "88.16" }, "stattrak_available": true },
+      { "name": "Bayonet | Freehand", "image": "images/bayonet_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "228.25", "MW": "199.99", "FT": "192.90", "WW": "177.48", "BS": "167.50" }, "stattrak_available": true },
+      { "name": "Flip Knife | Lore", "image": "images/flipknife_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "283.10", "MW": "207.98", "FT": "158.90", "WW": "154.75", "BS": "150.97" }, "stattrak_available": true },
+      { "name": "Bayonet | Autotronic", "image": "images/bayonet_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "553.98", "MW": "320.38", "FT": "265.00", "WW": "259.04", "BS": "252.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Bright Water", "image": "images/bayonet_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "191.00", "MW": "171.90", "FT": "149.58", "WW": "142.50", "BS": "141.71" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Autotronic", "image": "images/m9bayonet_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "1376.64", "MW": "880.00", "FT": "705.00", "WW": "658.78", "BS": "584.68" }, "stattrak_available": true },
+      { "name": "Karambit | Freehand", "image": "images/karambit_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "560.00", "MW": "521.57", "FT": "505.15", "WW": "480.00", "BS": "492.84" }, "stattrak_available": true },
+      { "name": "Karambit | Bright Water", "image": "images/karambit_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "556.67", "MW": "493.25", "FT": "437.60", "WW": "437.38", "BS": "431.24" }, "stattrak_available": true },
+      { "name": "Karambit | Black Laminate", "image": "images/karambit_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "1084.18", "MW": "768.00", "FT": "688.20", "WW": "640.00", "BS": "578.42" }, "stattrak_available": true }
+    ]
+  },
+  "gamma2": {
+    "mil_spec": [
+      {
+        "name": "UMP-45 | Briefing",
+        "image": "images/ump45_briefing.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "0.74", "MW": "0.20", "FT": "0.17", "WW": "0.15", "BS": "0.12" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Five-SeveN | Scumbria",
+        "image": "images/fiveseven_scumbria.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "0.90", "MW": "0.22", "FT": "0.16", "WW": "0.14", "BS": "0.12" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Negev | Dazzle",
+        "image": "images/negev_dazzle.webp",
+        "float_range": "0.10-0.65",
+        "price": { "FN": "0.00", "MW": "0.63", "FT": "0.19", "WW": "0.17", "BS": "0.12" },
+        "stattrak_available": true
+      },
+      {
+        "name": "G3SG1 | Ventilator",
+        "image": "images/g3sg1_ventilator.webp",
+        "float_range": "0.00-0.45",
+        "price": { "FN": "0.47", "MW": "0.17", "FT": "0.16", "WW": "0.13", "BS": "0.00" },
+        "stattrak_available": true
+      },
+      {
+        "name": "CZ75-Auto | Imprint",
+        "image": "images/cz75auto_imprint.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "0.84", "MW": "0.22", "FT": "0.16", "WW": "0.15", "BS": "0.12" },
+        "stattrak_available": true
+      },
+      {
+        "name": "XM1014 | Slipstream",
+        "image": "images/xm1014_slipstream.webp",
+        "float_range": "0.00-0.50",
+        "price": { "FN": "0.49", "MW": "0.20", "FT": "0.17", "WW": "0.16", "BS": "0.15" },
+        "stattrak_available": true
+      },
+      {
+        "name": "P90 | Grim",
+        "image": "images/p90_grim.webp",
+        "float_range": "0.00-0.80",
+        "price": { "FN": "0.63", "MW": "0.21", "FT": "0.17", "WW": "0.17", "BS": "0.16" },
+        "stattrak_available": true
+      }
+    ],
+
+    "restricted": [
+      {
+        "name": "MAG-7 | Petroglyph",
+        "image": "images/mag7_petroglyph.webp",
+        "float_range": "0.00-0.44",
+        "price": { "FN": "3.46", "MW": "1.17", "FT": "1.01", "WW": "0.99", "BS": "0.00" },
+        "stattrak_available": true
+      },
+      {
+        "name": "SCAR-20 | Powercore",
+        "image": "images/scar20_powercore.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "4.76", "MW": "1.70", "FT": "1.04", "WW": "1.01", "BS": "0.94" },
+        "stattrak_available": true
+      },
+      {
+        "name": "SG 553 | Triarch",
+        "image": "images/sg553_triarch.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "4.62", "MW": "1.45", "FT": "1.10", "WW": "0.97", "BS": "0.89" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Glock-18 | Weasel",
+        "image": "images/glock18_weasel.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "8.59", "MW": "1.62", "FT": "1.07", "WW": "0.93", "BS": "0.93" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Desert Eagle | Directive",
+        "image": "images/deserteagle_directive.webp",
+        "float_range": "0.06-1.00",
+        "price": { "FN": "32.97", "MW": "2.93", "FT": "1.12", "WW": "0.92", "BS": "0.77" },
+        "stattrak_available": true
+      }
+    ],
+
+    "classified": [
+      {
+        "name": "MP9 | Airlock",
+        "image": "images/mp9_airlock.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "36.99", "MW": "15.07", "FT": "10.01", "WW": "9.36", "BS": "9.33" },
+        "stattrak_available": true
+      },
+      {
+        "name": "AUG | Syd Mead",
+        "image": "images/aug_sydmead.webp",
+        "float_range": "0.00-0.80",
+        "price": { "FN": "39.00", "MW": "14.04", "FT": "9.85", "WW": "9.69", "BS": "9.28" },
+        "stattrak_available": true
+      },
+      {
+        "name": "Tec-9 | Fuel Injector",
+        "image": "images/tec9_fuelinjector.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "48.35", "MW": "14.49", "FT": "10.33", "WW": "9.26", "BS": "9.26" },
+        "stattrak_available": true
+      }
+    ],
+
+    "covert": [
+      {
+        "name": "FAMAS | Roll Cage",
+        "image": "images/famas_rollcage.webp",
+        "float_range": "0.00-1.00",
+        "price": { "FN": "189.34", "MW": "113.27", "FT": "101.42", "WW": "93.72", "BS": "89.54" },
+        "stattrak_available": true
+      },
+      {
+        "name": "AK-47 | Neon Revolution",
+        "image": "images/ak47_neonrevolution.webp",
+        "float_range": "0.00-0.80",
+        "price": { "FN": "425.10", "MW": "232.05", "FT": "123.42", "WW": "99.31", "BS": "85.10" },
+        "stattrak_available": true
+      }
+    ],
+
+    "exceedingly_rare": [
+      { "name": "Bayonet | Gamma Doppler Emerald", "image": "images/bayonet_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "3600.00", "MW": "2399.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 1", "image": "images/bayonet_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "634.67", "MW": "548.86", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 2", "image": "images/bayonet_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "947.28", "MW": "718.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 3", "image": "images/bayonet_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "620.41", "MW": "549.56", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Gamma Doppler Phase 4", "image": "images/bayonet_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "799.24", "MW": "634.80", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Emerald", "image": "images/flipknife_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "1700.00", "MW": "1508.26", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 1", "image": "images/flipknife_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "495.81", "MW": "495.70", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 2", "image": "images/flipknife_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "671.99", "MW": "611.57", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 3", "image": "images/flipknife_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "544.04", "MW": "455.85", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Gamma Doppler Phase 4", "image": "images/flipknife_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "538.81", "MW": "511.16", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Emerald", "image": "images/gutknife_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "699.00", "MW": "477.71", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 1", "image": "images/gutknife_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "331.43", "MW": "223.67", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 2", "image": "images/gutknife_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "313.84", "MW": "231.35", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 3", "image": "images/gutknife_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "260.59", "MW": "163.97", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Gut Knife | Gamma Doppler Phase 4", "image": "images/gutknife_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "268.98", "MW": "165.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Emerald", "image": "images/karambit_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "11500.00", "MW": "10500.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 1", "image": "images/karambit_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "2717.62", "MW": "2602.79", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 2", "image": "images/karambit_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "3947.66", "MW": "3407.75", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 3", "image": "images/karambit_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "2676.00", "MW": "2237.98", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Gamma Doppler Phase 4", "image": "images/karambit_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "2699.67", "MW": "2494.85", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Emerald", "image": "images/m9bayonet_gammadoppler_emerald.webp", "float_range": "0.00-0.08", "price": { "FN": "10112.54", "MW": "9268.71", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 1", "image": "images/m9bayonet_gammadoppler_phase1.webp", "float_range": "0.00-0.08", "price": { "FN": "1640.47", "MW": "1639.77", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 2", "image": "images/m9bayonet_gammadoppler_phase2.webp", "float_range": "0.00-0.08", "price": { "FN": "2361.50", "MW": "2017.15", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 3", "image": "images/m9bayonet_gammadoppler_phase3.webp", "float_range": "0.00-0.08", "price": { "FN": "1683.28", "MW": "1640.54", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Gamma Doppler Phase 4", "image": "images/m9bayonet_gammadoppler_phase4.webp", "float_range": "0.00-0.08", "price": { "FN": "1681.09", "MW": "1600.00", "FT": "0.00", "WW": "0.00", "BS": "0.00" }, "stattrak_available": true },
+      { "name": "Karambit | Autotronic", "image": "images/karambit_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "1996.07", "MW": "1192.94", "FT": "940.93", "WW": "826.00", "BS": "697.90" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Bright Water", "image": "images/m9bayonet_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "425.00", "MW": "372.49", "FT": "336.00", "WW": "335.17", "BS": "334.92" }, "stattrak_available": true },
+      { "name": "Bayonet | Lore", "image": "images/bayonet_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "464.08", "MW": "316.46", "FT": "242.00", "WW": "239.62", "BS": "223.02" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Lore", "image": "images/m9bayonet_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "1500.00", "MW": "979.81", "FT": "494.23", "WW": "452.43", "BS": "391.55" }, "stattrak_available": true },
+      { "name": "Gut Knife | Bright Water", "image": "images/gutknife_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "73.89", "MW": "73.05", "FT": "65.73", "WW": "62.77", "BS": "59.32" }, "stattrak_available": true },
+      { "name": "Flip Knife | Bright Water", "image": "images/flipknife_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "136.95", "MW": "124.77", "FT": "120.54", "WW": "120.19", "BS": "110.91" }, "stattrak_available": true },
+      { "name": "Gut Knife | Black Laminate", "image": "images/gutknife_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "102.00", "MW": "67.06", "FT": "60.73", "WW": "58.29", "BS": "56.84" }, "stattrak_available": true },
+      { "name": "Gut Knife | Freehand", "image": "images/gutknife_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "91.30", "MW": "79.88", "FT": "65.74", "WW": "62.58", "BS": "64.90" }, "stattrak_available": true },
+      { "name": "Flip Knife | Black Laminate", "image": "images/flipknife_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "193.32", "MW": "125.29", "FT": "118.00", "WW": "113.42", "BS": "111.85" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Freehand", "image": "images/m9bayonet_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "435.00", "MW": "384.08", "FT": "364.41", "WW": "359.42", "BS": "355.99" }, "stattrak_available": true },
+      { "name": "Gut Knife | Autotronic", "image": "images/gutknife_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "189.98", "MW": "114.34", "FT": "96.04", "WW": "94.00", "BS": "92.00" }, "stattrak_available": true },
+      { "name": "Flip Knife | Freehand", "image": "images/flipknife_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "138.47", "MW": "129.02", "FT": "119.67", "WW": "118.81", "BS": "115.51" }, "stattrak_available": true },
+      { "name": "Flip Knife | Autotronic", "image": "images/flipknife_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "337.34", "MW": "210.00", "FT": "168.10", "WW": "166.10", "BS": "155.37" }, "stattrak_available": true },
+      { "name": "Karambit | Lore", "image": "images/karambit_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "1400.45", "MW": "850.00", "FT": "564.00", "WW": "527.51", "BS": "499.00" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Black Laminate", "image": "images/m9bayonet_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "725.00", "MW": "550.60", "FT": "510.61", "WW": "487.28", "BS": "481.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Black Laminate", "image": "images/bayonet_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "344.08", "MW": "178.00", "FT": "163.10", "WW": "161.13", "BS": "157.51" }, "stattrak_available": true },
+      { "name": "Gut Knife | Lore", "image": "images/gutknife_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "145.00", "MW": "108.47", "FT": "105.00", "WW": "90.01", "BS": "88.16" }, "stattrak_available": true },
+      { "name": "Bayonet | Freehand", "image": "images/bayonet_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "228.25", "MW": "199.99", "FT": "192.90", "WW": "177.48", "BS": "167.50" }, "stattrak_available": true },
+      { "name": "Flip Knife | Lore", "image": "images/flipknife_lore.webp", "float_range": "0.00-0.65", "price": { "FN": "283.10", "MW": "207.98", "FT": "158.90", "WW": "154.75", "BS": "150.97" }, "stattrak_available": true },
+      { "name": "Bayonet | Autotronic", "image": "images/bayonet_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "553.98", "MW": "320.38", "FT": "265.00", "WW": "259.04", "BS": "252.00" }, "stattrak_available": true },
+      { "name": "Bayonet | Bright Water", "image": "images/bayonet_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "191.00", "MW": "171.90", "FT": "149.58", "WW": "142.50", "BS": "141.71" }, "stattrak_available": true },
+      { "name": "M9 Bayonet | Autotronic", "image": "images/m9bayonet_autotronic.webp", "float_range": "0.00-0.85", "price": { "FN": "1376.64", "MW": "880.00", "FT": "705.00", "WW": "658.78", "BS": "584.68" }, "stattrak_available": true },
+      { "name": "Karambit | Freehand", "image": "images/karambit_freehand.webp", "float_range": "0.00-0.48", "price": { "FN": "560.00", "MW": "521.57", "FT": "505.15", "WW": "480.00", "BS": "492.84" }, "stattrak_available": true },
+      { "name": "Karambit | Bright Water", "image": "images/karambit_brightwater.webp", "float_range": "0.00-0.50", "price": { "FN": "556.67", "MW": "493.25", "FT": "437.60", "WW": "437.38", "BS": "431.24" }, "stattrak_available": true },
+      { "name": "Karambit | Black Laminate", "image": "images/karambit_blacklaminate.webp", "float_range": "0.00-1.00", "price": { "FN": "1084.18", "MW": "768.00", "FT": "688.20", "WW": "640.00", "BS": "578.42" }, "stattrak_available": true }
+    ]
   }
 }
