@@ -347,6 +347,12 @@ body {
 }
 
 /* Rarity colors (same as your theme) */
+.rarity-consumer {
+  background: linear-gradient(to right, #8b8b8b, #c7c7c7);
+}
+.rarity-industrial {
+  background: linear-gradient(to right, #95b3eb, #8cc2ff);
+}
 .rarity-mil_spec {
     background: linear-gradient(to right, #234c8f, #4a90e2);
 }

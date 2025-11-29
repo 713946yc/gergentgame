@@ -306,6 +306,8 @@ export function initCasePage(options) {
     const nameHTML = formatFormattedName(currentWinner, isST);
 
     const rarityText = currentWinner.rarity
+      .replace("consumer", "Consumer")
+      .replace("industrial", "Industrial")
       .replace("mil_spec", "Mil-Spec")
       .replace("restricted", "Restricted")
       .replace("classified", "Classified")
