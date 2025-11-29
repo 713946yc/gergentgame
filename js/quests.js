@@ -18,7 +18,10 @@ const ALL_CASE_IDS = [
   "revolution",
   "glove",
   "gamma",
-  "gamma2"
+  "gamma2",
+  "csgo_weapon",
+  "csgo_weapon2",
+  "csgo_weapon3"
 ];
 
 export const QUESTS = [
@@ -37,8 +40,8 @@ export const QUESTS = [
     desc: "Open at least one of every case.",
     type: "open_all_case_types",
     target: ALL_CASE_IDS.length,
-    rewardXp: 5,
-    rewardMoney: 50,
+    rewardXp: 20,
+    rewardMoney: 200,
   },
   {
     id: "snakebite_gloves",

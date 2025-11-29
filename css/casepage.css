@@ -75,3 +75,6 @@
     font-size: 1rem;
     font-family: "Nunito", sans-serif;
 }
+.cases-page #site-title {
+    text-shadow: none !important;
+}

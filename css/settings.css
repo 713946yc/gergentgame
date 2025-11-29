@@ -26,3 +26,11 @@
     cursor: pointer;
 }
 .reset-btn:hover { background-color: #a5281e; }
+.cases-icon,
+.home-icon,
+.inventory-icon,
+.trade-icon {
+    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
+    transform: translateY(-5%);
+    width: 24px;
+}

@@ -377,7 +377,7 @@ export const SPECIAL_PATTERNS = {
         {
             min: 458,
             max: 458,
-            tag: "Tier 1",
+            tag: "Skull • Tier 1",
             multiplier: 2.0,
             color: "#860404ff"
         },
@@ -422,6 +422,280 @@ export const SPECIAL_PATTERNS = {
             tag: "Skull • Tier 1",
             multiplier: 2.0,
             color: "#860404ff"
+        }
+    ],
+    "Ak-47 | Case Hardened": [
+        {
+            min: 661,
+            max: 661,
+            tag: "Blue Gem • #1",
+            multiplier: 2000.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 151,
+            max: 151,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 955,
+            max: 955,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 321,
+            max: 321,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 387,
+            max: 387,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 670,
+            max: 670,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 179,
+            max: 179,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        }
+    ],
+    "M9 Bayonet | Case Hardened": [
+        {
+            min: 601,
+            max: 601,
+            tag: "Blue Gem • #1",
+            multiplier: 60.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 417,
+            max: 417,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        }
+    ],
+    "Flip Knife | Case Hardened": [
+        {
+            min: 670,
+            max: 670,
+            tag: "Blue Gem • #1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 321,
+            max: 321,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 151,
+            max: 151,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 592,
+            max: 592,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 661,
+            max: 661,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 555,
+            max: 555,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        }
+    ],
+    "Karambit | Case Hardened": [
+        {
+            min: 387,
+            max: 387,
+            tag: "Blue Gem • #1",
+            multiplier: 800.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 442,
+            max: 442,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 269,
+            max: 269,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 321,
+            max: 321,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 73,
+            max: 73,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 955,
+            max: 955,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 853,
+            max: 853,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 902,
+            max: 902,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 507,
+            max: 507,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 776,
+            max: 776,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 10.0,
+            color: "#00b7ff"
+        }
+    ],
+    "Bayonet | Case Hardened": [
+        {
+            min: 555,
+            max: 555,
+            tag: "Blue Gem • #1",
+            multiplier: 20.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 592,
+            max: 592,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 6.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 670,
+            max: 670,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 6.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 151,
+            max: 151,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 6.0,
+            color: "#00b7ff"
+        },
+        {
+            min: 179,
+            max: 179,
+            tag: "Blue Gem • Tier 1",
+            multiplier: 6.0,
+            color: "#00b7ff"
+        }
+    ],
+    "Bayonet | Case Hardened": [
+        {
+            min: 567,
+            max: 567,
+            tag: "Blue Gem • #1",
+            multiplier: 15.0,
+            color: "#00b7ff"
+        }
+    ],
+    "Gut Knife | Fade": [
+        {
+            min: 763,
+            max: 763,
+            tag: "100% Fade",
+            multiplier: 2.0,
+            color: "#da5700ff"
+        }
+    ],
+    "Flip Knife | Fade": [
+        {
+            min: 763,
+            max: 763,
+            tag: "100% Fade",
+            multiplier: 2.0,
+            color: "#da5700ff"
+        }
+    ],
+    "M9 Bayonet | Fade": [
+        {
+            min: 763,
+            max: 763,
+            tag: "100% Fade",
+            multiplier: 2.0,
+            color: "#da5700ff"
+        }
+    ],
+    "Karambit | Fade": [
+        {
+            min: 412,
+            max: 412,
+            tag: "100% Fade",
+            multiplier: 2.0,
+            color: "#da5700ff"
+        }
+    ],
+    "Five-SeveN | Case Hardened": [
+        {
+            min: 278,
+            max: 278,
+            tag: "Blue Gem • #1",
+            multiplier: 500.0,
+            color: "#00b7ff"
         }
     ]
 };
