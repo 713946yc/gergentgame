@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quests & Achievements</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/quests.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="home-icon">
+    <span class="sidebar-text">Home</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+    <img src="images/cases.png" class="cases-icon">
+    <span class="sidebar-text">Cases</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/inventory.png" class="inventory-icon" onclick="location.href='inventory.html'">
+    <span class="sidebar-text">Inventory</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/trade.png" class="trade-icon">
+    <span class="sidebar-text">Trade Ups</span>
+  </div>
+</div>
+
+<div id="popupContainer"></div>
+
+<h1 class="qa-title">Quests & Achievements</h1>
+
+<h1 class="qa-title">Quests & Achievements</h1>
+
+<div class="qa-container">
+
+  <div class="qa-column">
+    <h2>Quests</h2>
+    <div id="questsList"></div>
+  </div>
+
+  <div class="qa-column">
+    <h2>Achievements</h2>
+    <div id="achievementsList"></div>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from "./js/supabaseClient.js";
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+import { initQuestsUI } from "./js/quests.js";
+
+const uid = localStorage.getItem("uid");
+if (!uid) window.location.href = "login.html";
+
+function refreshTopBarMoney(balance) {
+  const el = document.getElementById("moneyAmount");
+  if (el) el.textContent = Money.format(balance);
+}
+Money.onChange(refreshTopBarMoney);
+Money.get(uid).then(refreshTopBarMoney);
+
+function updateLevelBar(xp) {
+  const { level, currentXp, xpToNextLevel } = getLevel(xp);
+  const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+  document.getElementById("levelDisplay").textContent =
+    `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+  document.getElementById("levelBarFill").style.width = percent + "%";
+}
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+
+window.toggleSidebar = () => {
+  document.getElementById("sidebar").classList.toggle("open");
+};
+
+initQuestsUI(uid);
+</script>
+<script src="js/auth.js"></script>
+<script type="module" src="js/popup.js"></script>
+</body>
+</html>

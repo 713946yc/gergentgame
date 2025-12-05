@@ -1,0 +1,59 @@
+.welcome-msg {
+    margin-left: 120px;
+    margin-top: 150px;
+    font-family: "Nunito", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+}
+.username {
+    color: #6ecbff;
+    font-weight: 800;
+}
+.patchnotes-btn {
+    margin-top: 25px;
+    margin-left: 120px;
+    background: #300430;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: "Nunito", sans-serif;
+    transition: transform 0.1s ease-in-out;
+}
+.patchnotes-btn:hover {
+    transform: scale(1.05);
+}
+#suggestionsContainer {
+    margin-left: 120px;
+    margin-top: 50px;
+    max-width: 400px;
+    font-family: "Nunito", sans-serif;
+    color: white;
+    margin-bottom: 100px;
+}
+#suggestionsContainer textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    resize: none;
+}
+#suggestionsContainer button {
+    margin-top: 8px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#suggestionsList li {
+    background: #300430;
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+}

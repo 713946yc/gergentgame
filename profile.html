@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="home-icon">
+    <span class="sidebar-text">Home</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/cases.png" class="cases-icon" onclick="location.href='casepage.html'">
+    <span class="sidebar-text">Cases</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/inventory.png" class="inventory-icon" onclick="location.href='inventory.html'">
+    <span class="sidebar-text">Inventory</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/trade.png" class="trade-icon">
+    <span class="sidebar-text">Trade Ups</span>
+  </div>
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="settings-container">
+
+  <div class="settings-title">Profile</div>
+
+  <button class="logout-btn  " onclick="logoutUser()">Log Out</button>
+
+</div>
+<script src="js/auth.js"></script>
+<script src="js/money.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module">
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";  
+
+const uid = localStorage.getItem("uid"); // same as your login system
+
+if (!uid) {
+    window.location.href = "login.html";
+}
+
+function refreshTopBarMoney(balance) {
+    const el = document.getElementById('moneyAmount');
+    if (el) el.textContent = Money.format(balance);
+}
+
+Money.onChange(refreshTopBarMoney);
+
+Money.get(uid).then(refreshTopBarMoney);
+
+function updateLevelBar(xp) {
+    const { level, currentXp, xpToNextLevel } = getLevel(xp);
+    const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+
+    const displayEl = document.getElementById("levelDisplay");
+    const fillEl = document.getElementById("levelBarFill");
+
+    if (displayEl)
+        displayEl.textContent = `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+
+    if (fillEl) fillEl.style.width = percent + "%";
+}
+
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+</script>
+
+<script>
+function logoutUser() {
+    localStorage.removeItem("uid");
+    localStorage.removeItem("username");
+    window.location.href = "login.html";
+}
+
+window.logoutUser = logoutUser;
+</script>
+
+<script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+async function refreshMoneyDisplay() {
+  const balance = await Money.get(uid);
+  document.getElementById("moneyAmount").textContent = Money.format(balance);
+}
+
+Money.onChange(refreshMoneyDisplay);
+refreshMoneyDisplay();
+</script>
+</body>
+</html>

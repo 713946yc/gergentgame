@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Money Transfer</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/money_transfer.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()"><div></div><div></div><div></div></div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box"><span id="moneyAmount">$0.00</span></div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground"><div id="levelBarFill"></div></div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="sidebar-icon"><span class="sidebar-text">Home</span>
+  </div>
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+    <img src="images/cases.png" class="sidebar-icon"><span class="sidebar-text">Cases</span>
+  </div>
+  <div class="sidebar-item" onclick="location.href='inventory.html'">
+    <img src="images/inventory.png" class="sidebar-icon"><span class="sidebar-text">Inventory</span>
+  </div>
+  <div class="sidebar-item" onclick="location.href='tradeup.html'">
+    <img src="images/trade.png" class="sidebar-icon"><span class="sidebar-text">Trade Ups</span>
+  </div>
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="transfer-box">
+  <div class="transfer-title">Money Transfer</div>
+  <div class="balance-text">Balance: <span id="moneyAmount2">$0.00</span></div>
+
+  <div id="remainingDeposit">Remaining deposit limit: $0</div>
+
+  <div class="transfer-buttons">
+    <button id="depositBtn" class="mode-btn active">Deposit</button>
+    <button id="withdrawBtn" class="mode-btn">Withdraw</button>
+  </div>
+
+  <input id="amountInput" type="number" placeholder="Enter amount ($)" min="0.01" step="0.01">
+  <button id="confirmBtn">DEPOSIT</button>
+</div>
+
+<script type="module">
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+import { supabase } from "./js/supabaseClient.js";
+
+let isProcessing = false;
+
+const uid = localStorage.getItem("uid");
+if (!uid) window.location.href = "login.html";
+
+window.toggleSidebar = () => {
+  document.getElementById("sidebar").classList.toggle("open");
+};
+
+function refreshMoney(balance) {
+  document.getElementById("moneyAmount").textContent = Money.format(balance);
+  document.getElementById("moneyAmount2").textContent = Money.format(balance);
+}
+Money.onChange(refreshMoney);
+Money.get(uid).then(refreshMoney);
+
+function updateLevelBar(xp) {
+  xp = Number(xp) || 0;
+  const { level, currentXp, xpToNextLevel } = getLevel(xp);
+  const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+
+  const levelDisplay = document.getElementById("levelDisplay");
+  const levelBarFill = document.getElementById("levelBarFill");
+  if (!levelDisplay || !levelBarFill) return;
+
+  levelDisplay.textContent =
+    `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+  levelBarFill.style.width = percent + "%";
+}
+
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+
+function getDepositLimitFromXp(xp) {
+  xp = Number(xp) || 0;
+  const { level } = getLevel(xp);
+  return { level, depositLimit: 1000 + (level - 1) * 500 };
+}
+
+async function refreshDepositRemaining() {
+  const xp = await Xp.get(uid);
+  const { level } = getLevel(xp);
+  const depositLimit = 1000 + (level - 1) * 500;
+
+  const { data, error } = await supabase
+    .from("deposit_tracker")
+    .select("total_deposited")
+    .eq("user_id", uid)
+    .single();
+
+  const totalDeposited = data?.total_deposited ?? 0;
+
+  const remaining = Math.max(0, depositLimit - totalDeposited);
+
+  document.getElementById("remainingDeposit").textContent =
+    `Remaining deposit limit (Level ${level}): $${remaining}`;
+}
+
+refreshDepositRemaining();
+
+let mode = "deposit";
+const depBtn = document.getElementById("depositBtn");
+const witBtn = document.getElementById("withdrawBtn");
+const confirmBtn = document.getElementById("confirmBtn");
+const remainingDepositEl = document.getElementById("remainingDeposit");
+
+depBtn.onclick = () => {
+  mode = "deposit";
+  depBtn.classList.add("active");
+  witBtn.classList.remove("active");
+  confirmBtn.textContent = "DEPOSIT";
+  if (remainingDepositEl) remainingDepositEl.style.display = "block";
+};
+
+witBtn.onclick = () => {
+  mode = "withdraw";
+  witBtn.classList.add("active");
+  depBtn.classList.remove("active");
+  confirmBtn.textContent = "WITHDRAW";
+  if (remainingDepositEl) remainingDepositEl.style.display = "none";
+};
+
+confirmBtn.onclick = async () => {
+  if (isProcessing) return unlock();
+  isProcessing = true;
+  confirmBtn.disabled = true;
+
+  let amount = parseFloat(document.getElementById("amountInput").value);
+  if (!amount || amount <= 0) return unlock();
+  amount = Math.round(amount * 100) / 100;
+
+  if (mode === "deposit") {
+    const xp = await Xp.get(uid);
+    const { level, depositLimit } = getDepositLimitFromXp(xp);
+
+    const { data: tracker } = await supabase
+      .from("deposit_tracker")
+      .select("total_deposited")
+      .eq("user_id", uid)
+      .maybeSingle();
+
+    const totalDeposited = tracker?.total_deposited ?? 0;
+
+    if (totalDeposited + amount > depositLimit) {
+      alert(
+        `Deposit limit reached.\n` +
+        `Max allowed at Level ${level}: $${depositLimit}\n` +
+        `Level up to increase it!`
+      );
+      return unlock();
+    }
+
+    const { data, error } = await supabase.rpc("safe_deposit", {
+      p_uid: uid,
+      p_amount: amount
+    });
+
+    if (error) {
+      alert(error.message);
+      return unlock();
+    }
+
+    refreshMoney(data);
+    refreshDepositRemaining();
+
+  } else {
+    const { error } = await supabase.rpc("safe_withdraw", {
+      p_uid: uid,
+      p_amount: amount
+    });
+
+    if (error) {
+      alert(error.message);
+      return unlock();
+    }
+
+  }
+
+  const newBalance = await Money.get(uid);
+  refreshMoney(newBalance);
+  refreshDepositRemaining();
+
+  const xp = await Xp.get(uid);
+  updateLevelBar(xp);
+
+  document.getElementById("amountInput").value = "";
+
+  function unlock() {
+    confirmBtn.disabled = false;
+    isProcessing = false;
+  }
+};
+</script>
+<script type="module" src="js/popup.js"></script>
+</body>
+</html>

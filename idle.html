@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Idle Mode</title>
+    <link rel="stylesheet" href="css/idle.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ======== TOPBAR (YOUR EXACT CODE) ======== -->
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<!-- ======== SIDEBAR (YOUR EXACT CODE) ======== -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-item" onclick="location.href='index.html'"><img src="images/home.png"><span class="sidebar-text">Home</span></div>
+    <div class="sidebar-item" onclick="location.href='casepage.html'"><img src="images/cases.png"><span class="sidebar-text">Cases</span></div>
+    <div class="sidebar-item" onclick="location.href='inventory.html'"><img src="images/inventory.png"><span class="sidebar-text">Inventory</span></div>
+    <div class="sidebar-item" onclick="location.href='tradeup.html'"><img src="images/trade.png"><span class="sidebar-text">Trade Ups</span></div>
+</div>
+
+
+<!-- ======== IDLE UI WRAPPER ======== -->
+<div class="idle-wrapper">
+
+    <!-- Stats Box -->
+    <div class="idle-stats-box">
+        <h2>Idle Earnings</h2>
+        <div class="idle-stat"><b>Passive Income:</b> <span id="idlePassive">0.000 $/s</span></div>
+        <div class="idle-stat"><b>Click Value:</b> <span id="idleClickValue">0.000</span></div>
+        <div class="idle-stat"><b>Sacrificed Item:</b> <span id="sacrificeLabel">None</span></div>
+    </div>
+
+    <!-- Sacrifice + Circle -->
+    <div class="idle-center-box">
+        <div id="sacrificeArea">
+            <p>Select ONE item to sacrifice forever. You cannot undo this.</p>
+            <div id="idleInventoryList" class="idle-inventory-list"></div>
+        </div>
+
+        <div id="sacrificedDisplay" class="hidden">
+            <p>Your Sacrificed Item</p>
+            <div id="sacrificedCircle" class="rarity-circle">
+                <img id="sacrificedImage" src="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Powerups + Buildings -->
+    <div class="idle-right-box">
+        <h2>Case Empire</h2>
+        <div id="buildingList"></div>
+
+        <h2 style="margin-top:20px;">Active Powerups</h2>
+        <div id="powerupList"></div>
+    </div>
+
+</div>
+
+<!-- Golden Cookie Style Mystery Orb -->
+<div id="mysteryOrb" class="mystery-orb hidden">
+    <img src="images/mystery.png">
+</div>
+
+<!-- Toast -->
+<div id="powerupToast" class="powerup-toast hidden"></div>
+
+<script type="module" src="js/idle.js"></script>
+</body>
+</html>

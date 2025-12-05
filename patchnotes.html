@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patch Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/patchnotes.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="home-icon">
+    <span class="sidebar-text">Home</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+    <img src="images/cases.png" class="cases-icon">
+    <span class="sidebar-text">Cases</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='inventory.html'">
+    <img src="images/inventory.png" class="inventory-icon">
+    <span class="sidebar-text">Inventory</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='tradeup.html'">
+    <img src="images/trade.png" class="trade-icon">
+    <span class="sidebar-text">Trade Ups</span>
+  </div>
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="page-content">
+  <div class="page-title">Patch Notes</div>
+  <div class="page-subtitle">All updates and changes to gergent.online!</div>
+
+  <!-- ADDED id HERE, nothing else changed -->
+  <div class="patch-list" id="patchListOriginal">
+    <div class="patch-note">
+      <h2>4.41 - Patch Notes Changes</h2>
+      <p>Added titles to patch notes and added a dropdown feature for different major versions.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.4 - Gallery Case & Small Fixes</h2>
+      <p>Added Gallery Case and fixed Operation Bravo case not counting towards quests.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.3 - Operation Bravo Case</h2>
+      <p>Added Operation Bravo Case.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.23 - Small Pattern Update</h2>
+      <p>Added more rare patterns to AK47 | Case Hardened.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.22 - Operation Hydra Case</h2>
+      <p>Added Operation Hydra Case.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.21 - Pattern Update & XP System Changes</h2>
+      <p>Added Karambit | Marble Fade Ice & Fire Pattern, and made changes to the XP system</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.2 - Chroma Cases & Preview Contents Fix</h2>
+      <p>Added Chroma 1, 2 and 3 cases. Also fixed an issue where not possible wears were showing in the preview contents menu.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.1 - CS:GO Weapon Cases</h2>
+      <p>Added CS:GO Weapon Cases 1, 2 and 3. Also added title in the top left.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.01 - Small Colour Fixes</h2>
+      <p>Fixed Consumer & Industrial skins having no rarity colour.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>4.0 - Addition of Patterns, Gamma Cases & More</h2>
+      <p>Added Gamma and Gamma 2 cases. Added patterns, new looks & more.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.83 - Popup Update</h2>
+      <p>Added level up and quest/achievement completion popups & other backend changes.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.82 - Small Money Display Fix</h2>
+      <p>Made it so that the money display refreshes as soon as you complete a quest that grants money.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.81 - Quests Fix</h2>
+      <p>Fixed an issue where completing quests wouldn't grant money.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.8 - Quest & Achievements Update</h2>
+      <p>Added Quests & Achievements. Added a feature where the sell all and sell selected inventory buttons now say "Selling..." on click.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.73 - Duplication Glitches Fix</h2>
+      <p>Fixed a bunch of other duplication glitches.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.72 - Duplication Glitch Fix</h2>
+      <p>Fixed a duplication glitch involving depositing money.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.71 - Duplication Glitch Fix</h2>
+      <p>Fixed a duplication glitch involving the inventory.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.7 - Deposit Limit Update</h2>
+      <p>Added Scaling Depsoit Limits & XP resetting.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.6 - Level Update</h2>
+      <p>Added Levels and Money Transfer Limits.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.5 - CS20 Case, Vanilla Fixes & Preview Contents Fixes</h2>
+      <p>Added the CS20 Case, fixed Vanilla Knives having floats, adjusted preview contents page.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.44 - Suggestions Box</h2>
+      <p>Added the Suggestions box.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.43 - Small Spin Fix</h2>
+      <p>Fixed the spin sometimes landing outside the tile.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.42 - Small Image Fix</h2>
+      <p>Fixed some images not showing in the Revolution Case.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.41 - Small Preview Update</h2>
+      <p>Made it so you can now see prices in previewing case contents.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.4 - Preview Contents Update</h2>
+      <p>Introduced Previewing Case Contents.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.3 - Glove Case</h2>
+      <p>Introduced Glove Case.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.2 - Fever Case & Reset Fix</h2>
+      <p>Introduced Fever Case and updated case prices to make them accurate. Also fixed game reset not working properly.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.11 - Float Update</h2>
+      <p>Made floats exactly how they are in CS2.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>3.1 - Account Update & Other New Features</h2>
+      <p>Introduced user accounts, select all button, improved case spinning/skipping & more.</p>
+    </div>
+
+    <div class="patch-list">  
+      <div class="patch-note">
+      <h2>3.0 - A Completely New Design</h2>
+      <p>Introduced a completely brand new look, usernames, settings, and more.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>2.11 - Spin Ending Offset Update</h2>
+      <p>Made it so that the spin doesn't always end in the middle of the skin and made it so the yellow line doesn't disappear after the spin stops.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>2.1 - Snakebite Case</h2>
+      <p>Added Snakebite Case.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>2.01 - Small Design & Fixes Update</h2>
+      <p>New go back button design, fixed an error with the DreamHack 2014 Cobblestone Souvenir Package not taking money when opening the case, added button hover effect when hovering over the Patch Notes button.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>2.0 - More Cases, Inventory Changes, Patch Notes & More</h2>
+      <p>Introduced 4 new cases, inventory overhaul, deposit & withdraw, souvenirs, major design improvements, patch notes & more.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>1.22 - Missing Image Fix</h2>
+      <p>Small fixes to missing textures.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>1.21 - Sell All Button</h2>
+      <p>Sell all button in inventory.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>1.2 - StatTrak™ Update & Inventory Changes</h2>
+      <p>Addition of StatTrak™ and cleaner inventory design.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>1.1 - Inventory Buttons Update</h2>
+      <p>New inventory buttons.</p>
+    </div>
+
+    <div class="patch-note">
+      <h2>1.0 - Wear & Floats Update</h2>
+      <p>Release of game & introduction of wear & floats.</p>
+    </div>
+  </div>
+  </div>
+
+  <!-- NEW: Collapsible groups (initially empty, filled by JS) -->
+  <div class="patch-group">
+    <button class="patch-toggle">4.x Updates ▼</button>
+    <div class="patch-content" id="group4"></div>
+  </div>
+
+  <div class="patch-group">
+    <button class="patch-toggle">3.x Updates ▼</button>
+    <div class="patch-content" id="group3"></div>
+  </div>
+
+  <div class="patch-group">
+    <button class="patch-toggle">2.x Updates ▼</button>
+    <div class="patch-content" id="group2"></div>
+  </div>
+
+  <div class="patch-group">
+    <button class="patch-toggle">1.x Updates ▼</button>
+    <div class="patch-content" id="group1"></div>
+  </div>
+
+</div> <!-- end .page-content -->
+
+<script>
+
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+}
+
+async function refreshMoneyDisplay() {
+  const balance = await Money.get(uid);
+  document.getElementById("moneyAmount").textContent = Money.format(balance);
+}
+
+Money.onChange(refreshMoneyDisplay);
+refreshMoneyDisplay();
+
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+</script>
+<script src="js/money.js"></script>
+<script src="js/money_controls.js"></script>
+<script src="js/kilowatt.js"></script>
+<script src="js/recoil.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module">
+  import { Money } from "./js/money.js";
+  import { Xp } from "./js/xp.js";
+  import { getLevel } from "./js/level.js";
+
+  const uid = localStorage.getItem("uid");
+  if (!uid) window.location.href = "login.html";
+
+  function refreshMoney(balance) {
+    document.getElementById("moneyAmount").textContent = Money.format(balance);
+  }
+  Money.onChange(refreshMoney);
+  Money.get(uid).then(refreshMoney);
+
+  function updateLevelBar(xp) {
+    const { level, currentXp, xpToNextLevel } = getLevel(xp);
+    const percent = (currentXp / xpToNextLevel) * 100;
+
+    document.getElementById("levelDisplay").textContent =
+      `Level: ${level} | XP: ${Math.floor(currentXp)} / ${xpToNextLevel}`;
+
+    document.getElementById("levelBarFill").style.width = percent + "%";
+  }
+
+  Xp.onChange(updateLevelBar);
+  Xp.get(uid).then(updateLevelBar);
+</script>
+
+<!-- NEW: script that moves notes into the collapsible groups -->
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const originalList = document.getElementById("patchListOriginal");
+  if (!originalList) return;
+
+  // Grab all patch notes anywhere inside the original container
+  const notes = Array.from(originalList.querySelectorAll(".patch-note"));
+  let movedCount = 0;
+
+  notes.forEach(note => {
+    const h2 = note.querySelector("h2");
+    if (!h2) return;
+
+    const versionText = h2.textContent.trim(); // e.g. "3.82 - Small Money Display Fix"
+    const major = versionText.split(".")[0];   // "3" from "3.82 - ..."
+
+    const target = document.getElementById("group" + major);
+    if (target) {
+      target.appendChild(note);
+      movedCount++;
+    }
+  });
+
+  // Only hide the original list if we actually moved something
+  if (movedCount > 0) {
+    originalList.style.display = "none";
+  }
+
+  // Set up collapsible behaviour (all start closed)
+  document.querySelectorAll(".patch-toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const content = button.nextElementSibling;
+      const isOpen = content.style.display === "block";
+
+      content.style.display = isOpen ? "none" : "block";
+
+      button.textContent = button.textContent.replace(
+        isOpen ? "▲" : "▼",
+        isOpen ? "▼" : "▲"
+      );
+    });
+  });
+});
+</script>
+
+</body>
+</html>

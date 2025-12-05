@@ -1,0 +1,115 @@
+.page-content {
+    margin-left: 100px;
+    margin-right: 40px;
+    margin-top: 110px;
+    padding-bottom: 40px;
+    font-family: "Nunito", sans-serif;
+    color: #e6e6f0;
+}
+.patch-content.open {
+    max-height: 500px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 14px 20px;
+    border-radius: 0 0 10px 10px; /* stays rounded */
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #d9c2ff;
+    margin-bottom: 6px;
+    text-shadow: 0 0 8px rgba(160, 120, 255, 0.4);
+}
+
+.page-subtitle {
+    font-size: 17px;
+    color: #9aa3ba;
+    margin-bottom: 25px;
+}
+
+.patch-list {
+    max-width: 720px;
+}
+
+/* --- Individual Patch Notes --- */
+.patch-note {
+    background: linear-gradient(135deg, #140225, #10001f);
+    margin-bottom: 15px;
+    padding: 16px 20px;
+    border-radius: 12px;
+
+    border-left: 4px solid #a680ff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.25s ease;
+}
+
+.patch-note:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(160, 120, 255, 0.35);
+    border-color: #2ecc71;
+}
+
+.patch-note h2 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    font-weight: 700;
+    color: #f1c40f;
+    text-shadow: 0 0 4px rgba(255, 220, 60, 0.4);
+}
+
+.patch-note p {
+    margin: 0;
+    font-size: 15px;
+    color: #d9d9ea;
+    line-height: 1.55;
+}
+
+
+/* --- Collapsible Patch Groups --- */
+.patch-group {
+    margin: 22px 0;
+    background: rgba(20, 12, 35, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    backdrop-filter: blur(4px);
+
+    box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+}
+
+.patch-toggle {
+    width: 100%;
+    padding: 16px 20px;
+    background: linear-gradient(90deg, #4e3c62, #6b5a84);
+    color: #fff;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Nunito", sans-serif;
+
+    transition: background 0.25s ease;
+}
+
+.patch-toggle:hover {
+    background: #88719e;
+}
+
+
+.patch-content {
+    display: none; /* stays collapsed initially */
+    padding: 14px 20px;
+    animation: fadeIn 0.25s ease forwards;
+}
+
+/* Smooth open animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

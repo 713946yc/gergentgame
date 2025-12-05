@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Settings</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()"><div></div><div></div><div></div></div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box"><span id="moneyAmount">$0.00</span></div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground"><div id="levelBarFill"></div></div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="sidebar-icon"><span class="sidebar-text">Home</span>
+  </div>
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+    <img src="images/cases.png" class="sidebar-icon"><span class="sidebar-text">Cases</span>
+  </div>
+  <div class="sidebar-item" onclick="location.href='inventory.html'">
+    <img src="images/inventory.png" class="sidebar-icon"><span class="sidebar-text">Inventory</span>
+  </div>
+  <div class="sidebar-item" onclick="location.href='tradeup.html'">
+    <img src="images/trade.png" class="sidebar-icon"><span class="sidebar-text">Trade Ups</span>
+  </div>
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="settings-container">
+  <div class="settings-title">Settings</div>
+  <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+</div>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module">
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+import { supabase } from "./js/supabaseClient.js";
+
+const uid = localStorage.getItem("uid");
+if (!uid) window.location.href = "login.html";
+
+window.toggleSidebar = () => { document.getElementById("sidebar").classList.toggle("open"); };
+
+function refreshMoney(balance) {
+  document.getElementById('moneyAmount').textContent = Money.format(balance);
+}
+Money.onChange(refreshMoney);
+Money.get(uid).then(refreshMoney);
+
+function updateLevelBar(xp) {
+  const { level, currentXp, xpToNextLevel } = getLevel(xp);
+  const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+  document.getElementById("levelDisplay").textContent = `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+  document.getElementById("levelBarFill").style.width = percent + "%";
+}
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+
+window.resetGame = async () => {
+  if (!uid) return;
+
+  await supabase.from("inventory").delete().eq("user_id", uid);
+  await supabase.from("money").update({ balance: 0 }).eq("user_id", uid);
+  await supabase.from("user_xp").update({ xp: 0 }).eq("user_id", uid);
+  await supabase.from("deposit_tracker").update({ total_deposited: 0 }).eq("user_id", uid);
+  await supabase.from("user_quests_progress").delete().eq("user_id", uid);
+  await supabase.from("user_achievements_progress").delete().eq("user_id", uid);
+
+  localStorage.removeItem(`cases_opened_${uid}`);
+  localStorage.removeItem("totalDeposited");
+
+  alert("Game has been reset!");
+  window.location.href = "index.html";
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="home-icon">
+    <span class="sidebar-text">Home</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+    <img src="images/cases.png" class="cases-icon">
+    <span class="sidebar-text">Cases</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/inventory.png" class="inventory-icon" onclick="location.href='inventory.html'">
+    <span class="sidebar-text">Inventory</span>
+  </div>
+
+  <div class="sidebar-item">
+    <img src="images/trade.png" class="trade-icon">
+    <span class="sidebar-text">Trade Ups</span>
+  </div>
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="welcome-msg">
+  Welcome <span id="welcomeUsername" class="username">User123</span>!
+</div>
+
+<button class="patchnotes-btn" onclick="location.href='patchnotes.html'">Patch Notes</button>
+
+<div id="suggestionsContainer">
+  <h2>Suggest Something!</h2>
+  <textarea id="suggestionInput" rows="4" placeholder="Type your suggestion here..."></textarea>
+  <button id="submitSuggestionBtn">Submit</button>
+</div>
+
+<script type="module">
+import { supabase } from './js/supabaseClient.js';
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+import { initQuestsUI } from "./js/quests.js";
+
+const uid = localStorage.getItem("uid");
+if (!uid) {
+    console.warn("No UID found, redirecting to login...");
+    window.location.href = "login.html";
+}
+
+await initQuestsUI(uid);
+
+function loadUsername() {
+  const username = localStorage.getItem("username") || "User123";
+  document.getElementById("welcomeUsername").textContent = username;
+}
+loadUsername();
+
+function refreshTopBarMoney(balance) {
+  const el = document.getElementById('moneyAmount');
+  if (el) el.textContent = Money.format(balance);
+}
+Money.onChange(refreshTopBarMoney);
+Money.get(uid).then(refreshTopBarMoney);
+
+function updateLevelBar(xp) {
+    const { level, currentXp, xpToNextLevel } = getLevel(xp);
+    const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+
+    const displayEl = document.getElementById("levelDisplay");
+    const fillEl = document.getElementById("levelBarFill");
+
+    if (displayEl)
+        displayEl.textContent = `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+
+    if (fillEl) fillEl.style.width = percent + "%";
+}
+
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+
+function toggleSidebar() { document.getElementById("sidebar").classList.toggle("open"); }
+window.toggleSidebar = toggleSidebar;
+
+const suggestionInput = document.getElementById('suggestionInput');
+const submitBtn = document.getElementById('submitSuggestionBtn');
+
+submitBtn.addEventListener('click', async () => {
+  const text = suggestionInput.value.trim();
+  if (!text) return alert("Please enter a suggestion!");
+  try {
+    const { data, error } = await supabase
+      .from('suggestions')
+      .insert([{ user_id: uid, suggestion: text }]);
+    if (error) throw error;
+    suggestionInput.value = '';
+    loadSuggestions();
+  } catch (err) {
+    alert("Error submitting suggestion: " + err.message);
+  }
+});
+
+async function loadSuggestions() {
+  const { data, error } = await supabase
+    .from('suggestions')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) return console.error(error);
+
+  const suggestionsList = document.getElementById('suggestionsList');
+  if (suggestionsList) {
+    suggestionsList.innerHTML = '';
+    data.forEach(s => {
+      const li = document.createElement('li');
+      li.textContent = s.suggestion;
+      suggestionsList.appendChild(li);
+    });
+  }
+}
+
+loadSuggestions();
+</script>
+
+<script src="./js/auth.js"></script>
+<script type="module" src="./js/popup.js"></script>
+</body>
+</html>

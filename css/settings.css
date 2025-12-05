@@ -1,0 +1,36 @@
+.settings-container {
+    margin-left: 120px;
+    margin-top: 120px;
+    width: 300px;
+    background-color: #10001f;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: "Nunito", sans-serif;
+    color: white;
+}
+.settings-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #c7b2df;
+}
+.reset-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.reset-btn:hover { background-color: #a5281e; }
+.cases-icon,
+.home-icon,
+.inventory-icon,
+.trade-icon {
+    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
+    transform: translateY(-5%);
+    width: 24px;
+}

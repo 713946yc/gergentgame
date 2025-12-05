@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cases</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/casepage.css">
+</head>
+<body class="cases-page">
+
+
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+
+  <div class="sidebar-item" onclick="location.href='index.html'">
+  <img src="images/home.png" class="home-icon">
+  <span class="sidebar-text">Home</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+  <img src="images/cases.png" class="cases-icon">
+  <span class="sidebar-text">Cases</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='inventory.html'">
+  <img src="images/inventory.png" class="inventory-icon">
+  <span class="sidebar-text">Inventory</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='tradeup.html'">
+  <img src="images/trade.png" class="trade-icon">
+  <span class="sidebar-text">Trade Ups</span>
+  </div>
+
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="content-header">
+  <div class="page-title">Select a Case to Open</div>
+
+    <div>
+    <select id="sortFilter" onchange="sortCases()">
+      <option value="recent">Recently Added</option>
+      <option value="price-desc">Price: Highest to Lowest</option>
+      <option value="price-asc">Price: Lowest to Highest</option>
+    </select>
+  </div>
+</div>
+
+<div class="case-grid" id="caseGrid">
+  <div class="case-item" onclick="location.href='gallery.html'" data-price="3.60" data-added="2025-12-05T10:10:00Z">
+  <img src="images/gallery.webp">
+  <h3>Gallery Case</h3>
+  <span class="price">$3.60</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='operation_bravo.html'" data-price="34.00" data-added="2025-12-05T10:00:00Z">
+  <img src="images/operation_bravo.webp">
+  <h3>Operation Bravo Case</h3>
+  <span class="price">$34.00</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='operation_hydra.html'" data-price="40.00" data-added="2025-12-02T10:00:00Z">
+  <img src="images/operation_hydra.webp">
+  <h3>Operation Hydra Case</h3>
+  <span class="price">$40.00</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='chroma3.html'" data-price="5.80" data-added="2025-12-01T10:32:00Z">
+  <img src="images/chroma3.webp">
+  <h3>Chroma 3 Case</h3>
+  <span class="price">$5.80</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='chroma2.html'" data-price="5.90" data-added="2025-12-01T10:31:00Z">
+  <img src="images/chroma2.webp">
+  <h3>Chroma 2 Case</h3>
+  <span class="price">$5.90</span>
+  </div>
+  
+  <div class="case-item" onclick="location.href='chroma.html'" data-price="6.50" data-added="2025-12-01T10:30:00Z">
+  <img src="images/chroma.webp">
+  <h3>Chroma Case</h3>
+  <span class="price">$6.50</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='csgo_weapon3.html'" data-price="9.10" data-added="2025-11-29T11:30:00Z">
+  <img src="images/csgo_weapon3.webp">
+  <h3>CS:GO Weapon Case 3</h3>
+  <span class="price">$9.10</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='csgo_weapon2.html'" data-price="10.70" data-added="2025-11-29T11:00:00Z">
+  <img src="images/csgo_weapon2.webp">
+  <h3>CS:GO Weapon Case 2</h3>
+  <span class="price">$10.70</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='csgo_weapon.html'" data-price="63.50" data-added="2025-11-29T10:00:00Z">
+  <img src="images/csgo_weapon.webp">
+  <h3>CS:GO Weapon Case</h3>
+  <span class="price">$63.50</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='gamma2.html'" data-price="5.95" data-added="2025-11-29T02:00:00Z">
+  <img src="images/gamma2.webp">
+  <h3>Gamma 2 Case</h3>
+  <span class="price">$5.95</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='gamma.html'" data-price="5.95" data-added="2025-11-28T10:00:00Z">
+  <img src="images/gamma.webp">
+  <h3>Gamma Case</h3>
+  <span class="price">$5.95</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='cs20.html'" data-price="3.40" data-added="2025-11-24T10:00:00Z">
+  <img src="images/cs20.webp">
+  <h3>CS20 Case</h3>
+  <span class="price">$3.40</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='glove.html'" data-price="16.90" data-added="2025-11-24T09:00:00Z">
+  <img src="images/glove.webp">
+  <h3>Glove Case</h3>
+  <span class="price">$16.90</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='fever.html'" data-price="3.15" data-added="2025-11-22T11:00:00Z">
+  <img src="images/fever.webp">
+  <h3>Fever Case</h3>
+  <span class="price">$3.15</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='snakebite.html'" data-price="2.85" data-added="2025-11-19T11:00:00Z">
+  <img src="images/snakebite.webp">
+  <h3>Snakebite Case</h3>
+  <span class="price">$2.85</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='dreamhack_2014_cobblestone_souvenir.html'" data-price="1500.00" data-added="2025-11-19T10:00:00Z">
+  <img src="images/dreamhack_2014_cobblestone_souvenir.webp">
+  <h3>DreamHack 2014 Cobblestone Souvenir</h3>
+  <span class="price">$1,500.00</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='revolution.html'" data-price="2.75" data-added="2025-11-18T13:00:00Z">
+  <img src="images/revolution.webp">
+  <h3>Revolution Case</h3>
+  <span class="price">$2.75</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='dreamsandnightmares.html'" data-price="3.55" data-added="2025-11-18T12:00:00Z">
+  <img src="images/dreamsandnightmares.webp">
+  <h3>Dreams & Nightmares</h3>
+  <span class="price">$3.55</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='recoil.html'" data-price="2.70" data-added="2025-11-18T11:00:00Z">
+  <img src="images/recoil.webp">
+  <h3>Recoil Case</h3>
+  <span class="price">$2.70</span>
+  </div>
+
+  <div class="case-item" onclick="location.href='kilowatt.html'" data-price="2.70" data-added="2025-11-18T10:00:00Z">
+  <img src="images/kilowatt.webp">
+  <h3>Kilowatt Case</h3>
+  <span class="price">$2.70</span>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/money.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module">
+import { Money } from "./js/money.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+
+const uid = localStorage.getItem("uid");
+
+if (!uid) {
+  window.location.href = "login.html";
+}
+
+function refreshTopBarMoney(balance) {
+  const el = document.getElementById('moneyAmount');
+  if (el) el.textContent = Money.format(balance);
+}
+
+Money.onChange(refreshTopBarMoney);
+Money.get(uid).then(refreshTopBarMoney);
+
+function updateLevelBar(xp) {
+    const { level, currentXp, xpToNextLevel } = getLevel(xp);
+    const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+
+    const displayEl = document.getElementById("levelDisplay");
+    const fillEl = document.getElementById("levelBarFill");
+
+    if (displayEl)
+        displayEl.textContent = `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+
+    if (fillEl) fillEl.style.width = percent + "%";
+}
+
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+</script>
+
+<script>
+function toggleSidebar() {
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+function refreshMoneyDisplay() {
+ document.getElementById("moneyAmount").textContent = Money.format(Money.get());
+}
+
+Money.onChange(refreshMoneyDisplay);
+refreshMoneyDisplay();
+
+const originalCaseItems = Array.from(document.getElementById('caseGrid').children);
+
+function getCasePrice(caseItem) {
+  return parseFloat(caseItem.dataset.price);
+}
+
+function getCaseAddedDate(caseItem) {
+  return new Date(caseItem.dataset.added);
+}
+
+function sortCases() {
+  const filterValue = document.getElementById('sortFilter').value;
+  const grid = document.getElementById('caseGrid');
+  let items = Array.from(grid.children);
+
+  if (filterValue === 'price-asc') {
+  items.sort((a, b) => getCasePrice(a) - getCasePrice(b));
+  } else if (filterValue === 'price-desc') {
+  items.sort((a, b) => getCasePrice(b) - getCasePrice(a));
+  } else if (filterValue === 'recent') {
+  items.sort((a, b) => getCaseAddedDate(b) - getCaseAddedDate(a));
+  }
+
+  grid.innerHTML = '';
+  items.forEach(item => grid.appendChild(item));
+}
+
+sortCases();
+
+</script>
+</body>
+</html>

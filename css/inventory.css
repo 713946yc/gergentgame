@@ -1,0 +1,646 @@
+/* GLOBAL PURPLE THEME */
+:root {
+    --bg: #150d23;
+    --topbar: #10001f;
+    --panel: #1b0d2e;
+    --panel-border: #2a1744;
+    --hover-glow: #6d35c7;
+    --text: #ffffff;
+
+    /* Rarities */
+    --consumer:#adb4bb; 
+    --industrial:#9cc4f1; 
+    --mil-spec:#4a90e2;
+    --restricted:#9b59b6;
+    --classified:#ff4dafff;
+    --covert:#e9331f;
+    --gold:#f1c40f; 
+}
+
+/* PAGE BACKGROUND */
+body {
+    background-color: var(--bg);
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+    color: var(--text);
+}
+
+/* TOP BAR */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    background-color: #10001f;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+
+/* HAMBURGER MENU */
+.menu-icon {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.menu-icon div {
+  width: 26px;
+  height: 3px;
+  background-color: #88719e;
+  border-radius: 3px;
+}
+
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    width: 60px;
+    height: 100vh;
+    background-color: #10001f;
+    padding-top: 60px;
+    overflow-x: hidden;
+    transition: width 0.25s ease;
+    z-index: 10;
+}
+
+/* EXPANDED SIDEBAR */
+.sidebar.open {
+    width: 180px;
+}
+
+/* SIDEBAR ITEMS */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    cursor: pointer;
+    color: white;
+    font-family: "Nunito", sans-serif;
+}
+
+.sidebar-item:hover {
+    background-color: #30005e;
+    border-radius: 8px;
+}
+
+/* ICONS */
+.sidebar-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* TEXT LABELS */
+.sidebar-text {
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+    font-size: 16px;
+}
+
+.sidebar.open .sidebar-text {
+    opacity: 1;
+}
+
+/* ICONS */
+.home-icon,
+.cases-icon,
+.inventory-icon,
+.trade-icon {
+  width: 24px;
+  filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
+}
+
+/* TOP RIGHT ICONS */
+.settings-icon,
+.rewards-icon,
+.profile-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  cursor: pointer;
+  filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
+}
+.settings-icon { right: 20px; }
+.profile-icon { right: 60px; }
+.rewards-icon { right: 100px; }
+.quests-icon {
+    position: absolute;
+    right: 140px;
+    top: 50%;
+    transform: translateY(-47%);
+    width: 22px;
+    cursor: pointer;
+    filter: invert(62%) sepia(13%) saturate(722%) hue-rotate(233deg) brightness(90%) contrast(86%);
+}
+
+.center-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.center-box {
+    background-color: #88719e;
+    padding: 10px 16px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    color: white;
+    font-size: 16px;
+}
+
+.wallet-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.wallet-btn:hover {
+    background-color: #28b863;
+}
+
+/* PAGE TITLE */
+.page-title {
+    margin-left: 120px;
+    margin-top: 140px;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+/* TOP CONTROLS */
+#inventoryControls {
+    margin-left: 120px;
+    margin-top: 20px;
+    width: calc(100% - 140px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#totalValue {
+    font-size: 1.2rem;
+    color: #8ae2ff;
+}
+#totalValue b {
+    color: var(--gold);
+    font-weight: 800;
+}
+
+/* SELL BUTTONS BAR */
+#topButtons {
+    display: flex;
+    gap: 10px;
+}
+
+/* UNIFIED BUTTON STYLE */
+#topButtons button {
+    background: #30005e;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 150px;            /* 🔥 all three same width */
+    box-sizing: border-box;
+    text-align: center;
+}
+#topButtons button:hover {
+    transform: scale(1.05);
+}
+
+/* Special colors for specific buttons (no padding/width overrides) */
+#sellAllBtn {
+    background:#c0392b;
+}
+#sellAllBtn:hover {
+    background:#e74c3c;
+}
+
+#sellSelectedBtn {
+    background:#2980b9;
+}
+#sellSelectedBtn:hover {
+    background:#3498db;
+}
+
+/* FILTER BAR */
+#filterBar {
+    display: flex;
+    gap: 15px;
+    margin-left: 120px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+#filterBar select, 
+#filterBar input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #2a1744;
+    background: var(--panel);
+    color: white;
+    font-size: 1rem;
+}
+
+/* ------------------------------- */
+/* CLEANER INVENTORY LAYOUT        */
+/* ------------------------------- */
+
+#inventoryGrid {
+    margin-left: 120px;
+    margin-top: 25px;
+    width: calc(100% - 140px);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+/* Inventory Card */
+.inventory-item {
+    background: #1a112b;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 2px solid rgba(255,255,255,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.45);
+}
+
+.inventory-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+}
+
+.inventory-item.selected {
+    border-color: #f1c40f;
+    box-shadow: 0 0 12px rgba(241,196,15,0.6);
+}
+
+.inv-image-wrapper {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #2a1b3d, #120b1f);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* IMPORTANT — prevent overflow */
+    overflow: hidden; /* 🔥 ensures images NEVER escape */
+}
+
+.inv-image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+/* Info Section */
+.inv-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* NAME (bold) */
+.inv-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* RARITY PILL NOW UNDER NAME */
+.inv-rarity-pill {
+    margin-top: -4px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    width: fit-content;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.4px;
+}
+
+/* Rarity colors (same as your theme) */
+.rarity-consumer {
+  background: linear-gradient(to right, #8b8b8b, #c7c7c7);
+}
+.rarity-industrial {
+  background: linear-gradient(to right, #95b3eb, #8cc2ff);
+}
+.rarity-mil_spec {
+    background: linear-gradient(to right, #234c8f, #4a90e2);
+}
+.rarity-restricted {
+    background: linear-gradient(to right, #5a2a87, #9b59b6);
+}
+.rarity-classified {
+    background: linear-gradient(to right, #932863, #ff4daf);
+}
+.rarity-covert {
+    background: linear-gradient(to right, #8b1a11, #e9331f);
+}
+.rarity-exceedingly_rare {
+    background: linear-gradient(to right, #c59a09, #f1c40f);
+}
+
+/* Wear / Float Row */
+.inv-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+/* Pattern Row */
+.inv-pattern-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.pattern-tag-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+
+    /* FIX: Remove gold default and let JS control only the badge */
+    border: 1px solid currentColor;
+    background: transparent;
+
+    /* Prevent row-wide coloring bugs */
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* Bottom Row */
+.inv-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6px;
+}
+
+.inv-price {
+    font-size: 15px;
+    font-weight: 800;
+    color: #f1c40f;
+}
+
+/* SELL BUTTON */
+.inventory-item .sell-btn {
+    background: #c0392b;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.1s ease, transform 0.05s ease;
+}
+
+.inventory-item .sell-btn:hover {
+    background: #e74c3c;
+    transform: scale(1.05);
+}
+
+
+
+/* --- Trade-Up Modal Overlay --- */
+#tradeUpModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: auto; /* allow scrolling if content taller than screen */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* --- Modal Content Box --- */
+#tradeUpModal > div {
+    background: var(--panel);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh; /* prevent overflowing top of screen */
+    overflow: hidden;
+}
+
+/* --- Modal Header & Close --- */
+#tradeUpModal h2 {
+    color: var(--text);
+    margin-bottom: 5px;
+}
+
+#tradeUpModal p {
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+#closeTradeUpModal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--text);
+}
+
+/* --- Trade-Up Grid --- */
+#tradeUpGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    overflow-y: auto;
+    flex: 1; /* allow grid to take remaining modal height */
+    padding-right: 5px;
+}
+
+/* --- Individual Trade-Up Item --- */
+#tradeUpGrid .inventory-item {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    position: relative;
+    border: 2px solid transparent;
+    transition: border 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+#tradeUpGrid .inventory-item.selected {
+    outline: 3px solid #3498db;
+    transform: scale(1.03);
+}
+
+/* --- Item Image --- */
+#tradeUpGrid .inventory-item img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+/* --- Item Name & Rarity --- */
+#tradeUpGrid .inventory-item .name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 2px;
+    color: var(--text);
+}
+
+#tradeUpGrid .inventory-item .rarity-text {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+/* --- Item Details & Price --- */
+#tradeUpGrid .inventory-item .details {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+#tradeUpGrid .inventory-item .price {
+    font-weight: 700;
+    color: var(--gold);
+    margin-top: 5px;
+    display: block;
+}
+
+#levelContainer {
+    position: absolute;       /* float independently in topbar */
+    top: 50%;                 /* vertical center */
+    left: 60%;                /* start at center of topbar */
+    transform: translateX(120px) translateY(-50%); /* shift right from center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+#levelBarBackground {
+    width: 250px; /* adjust length of bar */
+    height: 10px;
+    background-color: #300430;
+    border-radius: 5px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+#levelBarFill {
+    width: 0%;
+    height: 100%;
+    background-color: #fde400;
+    border-radius: 5px;
+    transition: width 0.3s ease;
+}
+
+#levelDisplay {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;       /* lighter gray */
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* Popup Container */
+#popupContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 99999;
+}
+
+/* Base popup style */
+.popup {
+  min-width: 260px;
+  background: rgba(30, 20, 45, 0.95);
+  color: white;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-family: "Nunito", sans-serif;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateX(120%);
+  display: flex;
+  flex-direction: column;
+  border-left: 5px solid #fff;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.popup-desc {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+.popup.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Type colors */
+.popup.quest  { border-color: #3498db; }
+.popup.achievement { border-color: #f1c40f; }
+.popup.levelup { border-color: #2ecc71; }

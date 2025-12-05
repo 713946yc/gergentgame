@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Inventory</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/inventory.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+
+  <div class="sidebar-item" onclick="location.href='index.html'">
+    <img src="images/home.png" class="home-icon">
+    <span class="sidebar-text">Home</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='casepage.html'">
+    <img src="images/cases.png" class="cases-icon">
+    <span class="sidebar-text">Cases</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='inventory.html'">
+    <img src="images/inventory.png" class="inventory-icon">
+    <span class="sidebar-text">Inventory</span>
+  </div>
+
+  <div class="sidebar-item" onclick="location.href='tradeup.html'">
+    <img src="images/trade.png" class="trade-icon">
+    <span class="sidebar-text">Trade Ups</span>
+  </div>
+
+</div>
+
+<div id="popupContainer"></div>
+
+<h1 class="page-title">My Inventory</h1>
+
+<div id="inventoryControls">
+    <div id="totalValue">Total Value: <b>$0.00</b></div>
+
+    <div id="topButtons">
+        <button id="sellAllBtn">Sell All</button>
+        <button id="sellSelectedBtn" style="display:none;">Sell Selected (0)</button>
+        <button id="selectAllBtn">Select All</button>
+    </div>
+</div>
+
+<div id="filterBar">
+    <input type="text" id="searchBar" placeholder="Search by name...">
+
+    <select id="rarityFilter">
+        <option value="">All Rarities</option>
+        <option value="consumer_grade">Consumer Grade</option>
+        <option value="industrial_grade">Industrial Grade</option>
+        <option value="mil_spec">Mil-Spec</option>
+        <option value="restricted">Restricted</option>
+        <option value="classified">Classified</option>
+        <option value="covert">Covert</option>
+        <option value="exceedingly_rare">Exceedingly Rare</option>
+    </select>
+
+    <select id="sortOrder">
+        <option value="newest">Sort By: Newest</option>
+        <option value="oldest">Sort By: Oldest</option>
+        <option value="float_asc">Float: Low to High</option>
+        <option value="float_desc">Float: High to Low</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="price_asc">Price: Low to High</option>
+    </select>
+</div>
+<script type="module">
+  import { Money } from "./js/money.js";
+  import { Xp } from "./js/xp.js";
+  import { getLevel } from "./js/level.js";
+
+  const uid = localStorage.getItem("uid");
+  if (!uid) window.location.href = "login.html";
+
+  function refreshMoney(balance) {
+    document.getElementById("moneyAmount").textContent = Money.format(balance);
+  }
+  Money.onChange(refreshMoney);
+  Money.get(uid).then(refreshMoney);
+
+  function updateLevelBar(xp) {
+    const { level, currentXp, xpToNextLevel } = getLevel(xp);
+    const percent = (currentXp / xpToNextLevel) * 100;
+
+    document.getElementById("levelDisplay").textContent =
+      `Level: ${level} | XP: ${Math.floor(currentXp)} / ${xpToNextLevel}`;
+
+    document.getElementById("levelBarFill").style.width = percent + "%";
+  }
+
+  Xp.onChange(updateLevelBar);
+  Xp.get(uid).then(updateLevelBar);
+</script>
+<script>
+  import { Xp } from "./xp.js";
+  import { getLevel } from "./level.js";
+</script>
+
+<div id="inventoryGrid"></div>
+
+<script>
+function toggleSidebar() {
+    document.getElementById("sidebar").classList.toggle("open");
+}
+</script>
+<script src="js/auth.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module" src="js/inventory.js"></script>
+</body>
+</html>

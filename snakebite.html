@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Snakebite Case</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/case.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="menu-icon" onclick="toggleSidebar()">
+    <div></div><div></div><div></div>
+  </div>
+
+  <div id="site-title">gergent.online</div>
+
+  <div class="center-group">
+    <div class="center-box">
+      <span id="moneyAmount">$0.00</span>
+    </div>
+    <button class="wallet-btn" onclick="location.href='money_transfer.html'">Wallet</button>
+  </div>
+
+  <div id="levelContainer">
+    <span id="levelDisplay">Level: 1 | XP: 0 / 100</span>
+    <div id="levelBarBackground">
+      <div id="levelBarFill"></div>
+    </div>
+  </div>
+
+  <img src="images/settings.png" class="settings-icon" onclick="location.href='settings.html'">
+  <img src="images/rewards.png" class="rewards-icon" onclick="location.href='rewards.html'">
+  <img src="images/profile.png" class="profile-icon" onclick="location.href='profile.html'">
+  <img src="images/quests.png" class="quests-icon" onclick="location.href='quests.html'">
+</div>
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-item" onclick="location.href='index.html'"><img src="images/home.png"><span class="sidebar-text">Home</span></div>
+    <div class="sidebar-item" onclick="location.href='casepage.html'"><img src="images/cases.png"><span class="sidebar-text">Cases</span></div>
+    <div class="sidebar-item" onclick="location.href='inventory.html'"><img src="images/inventory.png"><span class="sidebar-text">Inventory</span></div>
+    <div class="sidebar-item" onclick="location.href='tradeup.html'"><img src="images/trade.png"><span class="sidebar-text">Trade Ups</span></div>
+</div>
+
+<div id="popupContainer"></div>
+
+<div class="page-content">
+    <div class="case-container"><img src="images/snakebite.webp" class="case-img"></div>
+    <h2>Opening Snakebite Case</h2>
+    <div class="button-controls">
+        <button id="openBtn" class="open-btn">Open Case ($2.85)</button>
+        <button id="skipBtn" class="skip-btn">Skip</button>
+        <button id="previewBtn" class="open-btn" style="background:#9b59b6;">Preview Contents</button>
+    </div>
+    <div id="stripWrap"><div id="strip"></div><div id="centerLine"></div></div>
+    <div id="result"></div>
+</div>
+
+<div id="previewModal" class="preview-modal">
+    <div class="preview-window">
+        <span class="preview-close" id="previewClose">&times;</span>
+        <h2 class="preview-title">Snakebite Case Contents</h2>
+        <div id="previewWrapper"></div>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script type="module" src="js/popup.js"></script>
+<script type="module">
+import { Money } from "./js/money.js";
+import { initCasePage } from "./js/case_engine.js";
+import { Xp } from "./js/xp.js";
+import { getLevel } from "./js/level.js";
+import { initQuestsUI } from "./js/quests.js";
+
+const uid = localStorage.getItem("uid");
+if (!uid) window.location.href = "login.html";
+
+await initQuestsUI(uid);
+
+async function refreshMoneyDisplay(balanceOverride) {
+  const el = document.getElementById("moneyAmount");
+  if (!el) return;
+
+  if (typeof balanceOverride === "number") {
+    el.textContent = Money.format(balanceOverride);
+    return;
+  }
+
+  const balance = await Money.get(uid);
+  el.textContent = Money.format(balance);
+}
+
+Money.onChange(refreshMoneyDisplay);
+
+refreshMoneyDisplay();
+
+initCasePage({
+    uid,
+    Money,
+    caseKey: "snakebite",
+    skinsJsonKey: "snakebite",
+    caseCost: 2.85,
+    rarities: [
+        { name: "mil_spec",         weight: 79.92, color: "#4a90e2" },
+        { name: "restricted",       weight: 15.98, color: "#9b59b6" },
+        { name: "classified",       weight: 3.20,  color: "#ff4dafff" },
+        { name: "covert",           weight: 0.64,  color: "#e9331fff" },
+        { name: "exceedingly_rare", weight: 0.26,  color: "#f1c40f" }
+    ],
+    elements: {
+        openBtnId: "openBtn",
+        skipBtnId: "skipBtn",
+        stripId: "strip",
+        stripWrapId: "stripWrap",
+        centerLineId: "centerLine",
+        resultId: "result"
+    },
+    stripLength: 100,
+    winnerIndex: 80,
+    goldRarityName: "exceedingly_rare",
+    onBalanceChange: refreshMoneyDisplay
+});
+
+function updateLevelBar(xp) {
+    const { level, currentXp, xpToNextLevel } = getLevel(xp);
+    const percent = Math.min(100, (currentXp / xpToNextLevel) * 100);
+
+    const displayEl = document.getElementById("levelDisplay");
+    const fillEl = document.getElementById("levelBarFill");
+
+    if (displayEl)
+        displayEl.textContent = `Level: ${level} | XP: ${Math.floor(currentXp)} / ${Math.floor(xpToNextLevel)}`;
+
+    if (fillEl) fillEl.style.width = percent + "%";
+}
+
+Xp.onChange(updateLevelBar);
+Xp.get(uid).then(updateLevelBar);
+</script>
+
+<script>
+function toggleSidebar() { document.getElementById("sidebar").classList.toggle("open"); }
+
+const rarityColors = {
+    mil_spec: "#4a90e2",
+    restricted: "#9b59b6",
+    classified: "#ff4daf",
+    covert: "#e9331f",
+    exceedingly_rare: "#f1c40f"
+};
+
+const previewBtn = document.getElementById("previewBtn");
+const previewModal = document.getElementById("previewModal");
+const previewClose = document.getElementById("previewClose");
+const previewWrapper = document.getElementById("previewWrapper");
+
+previewBtn.addEventListener("click", async () => {
+    previewModal.style.display = "flex";
+    const res = await fetch("skins.json");
+    const data = await res.json();
+    const caseData = data.snakebite;
+
+    previewWrapper.innerHTML = "";
+    const order = ["mil_spec","restricted","classified","covert","exceedingly_rare"];
+
+    order.forEach(rarity => {
+        if (!caseData[rarity]) return;
+
+        const header = document.createElement("div");
+        header.className = `rarity-header`;
+        header.textContent =
+            rarity === "exceedingly_rare"
+                ? "EXCEEDINGLY RARE"
+                : rarity.replace("_"," ").toUpperCase();
+
+        header.style.color = rarityColors[rarity];
+        previewWrapper.appendChild(header);
+
+        const grid = document.createElement("div");
+        grid.className = "rarity-grid";
+
+        if (rarity === "exceedingly_rare") {
+            const card = document.createElement("div");
+            card.className = "skin-card";
+            card.style.border = `2px solid ${rarityColors[rarity]}`;
+
+            card.innerHTML = `
+                <img src="images/mystery.png" alt="Mystery Item">
+                <div class="skin-name"
+                    style="color:${rarityColors[rarity]};
+                    text-shadow:0 0 6px ${rarityColors[rarity]};">
+                    ★ Exceedingly Rare Gloves
+                </div>
+            `;
+
+            grid.appendChild(card);
+            previewWrapper.appendChild(grid);
+            return;
+        }
+
+        caseData[rarity].forEach(skin => {
+            const card = document.createElement("div");
+            card.className = "skin-card";
+            card.style.border = `2px solid ${rarityColors[rarity]}`;
+
+            let priceHTML = "";
+            const wearOrder = ["FN", "MW", "FT", "WW", "BS"];
+
+            wearOrder.forEach(wear => {
+                if (skin.price && parseFloat(skin.price[wear]) > 0) {
+                    priceHTML += `<span>${wear}: $${skin.price[wear]}</span> `;
+                }
+            });
+
+            card.innerHTML = `
+                <img src="${skin.image}" alt="">
+                <div class="skin-name" style="
+                    color:${rarityColors[rarity]};
+                    text-shadow:0 0 6px ${rarityColors[rarity]};">
+                    ${skin.name}
+                </div>
+                ${priceHTML ? `<div class="skin-price">${priceHTML}</div>` : ""}
+            `;
+
+            grid.appendChild(card);
+        });
+
+        previewWrapper.appendChild(grid);
+    });
+});
+
+previewClose.addEventListener("click", ()=>{ previewModal.style.display="none"; });
+window.onclick = e=>{ if(e.target===previewModal) previewModal.style.display="none"; };
+</script>
+</body>
+</html>
